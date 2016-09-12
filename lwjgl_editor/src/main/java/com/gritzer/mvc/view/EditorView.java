@@ -10,21 +10,20 @@ import com.gritzer.mvc.view.render.Renderer;
 @Named
 public class EditorView implements View {
 
-	@Inject
-	private CanvasHolder canvasHolder;
-	@Inject
-	private CanvasFilter canvasFilter;
-	@Inject
-	private Renderer renderer;
+  @Inject
+  private CanvasHolder canvasHolder;
+  @Inject
+  private CanvasFilter canvasFilter;
+  @Inject
+  private Renderer renderer;
 
-	@Override
-	public void init() {
-		canvasHolder.init();
-	}
+  @Override
+  public void init() {
+    canvasHolder.init();
+  }
 
-	@Override
-	public void render() {
-		canvasHolder.get().filter(canvasFilter)
-				.forEach(c -> c.accept(renderer));
-	}
+  @Override
+  public void render() {
+    canvasHolder.get().filter(canvasFilter).forEach(c -> c.accept(renderer));
+  }
 }

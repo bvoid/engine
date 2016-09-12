@@ -44,118 +44,118 @@ import com.gritzer.mvc.controller.LoopGenerator;
 @Named
 public class LwjglLoopGenerator implements LoopGenerator {
 
-	private static final String TITLE = "LWJGL SPACE";
+  private static final String TITLE = "LWJGL SPACE";
 
-	private static final int SCREEN_WIDTH = 1920;
-	private static final int SCREEN_HEIGHT = 1025;
+  private static final int SCREEN_WIDTH = 1920;
+  private static final int SCREEN_HEIGHT = 1025;
 
-	@Inject
-	private GLFWKeyCallback keyCallback;
-	@Inject
-	private GLFWCursorPosCallback mouseCallback;
-	@Inject
-	private GLFWMouseButtonCallback mouseButtonCallback;
+  @Inject
+  private GLFWKeyCallback keyCallback;
+  @Inject
+  private GLFWCursorPosCallback mouseCallback;
+  @Inject
+  private GLFWMouseButtonCallback mouseButtonCallback;
 
-	private long window;
+  private long window;
 
-	private void prepareOPENGL() {
-		GL11.glMatrixMode(GL11.GL_PROJECTION);
-		GL11.glLoadIdentity();
-		GL11.glOrtho(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 1, -1);
-		GL11.glMatrixMode(GL11.GL_MODELVIEW);
+  private void prepareOPENGL() {
+    GL11.glMatrixMode(GL11.GL_PROJECTION);
+    GL11.glLoadIdentity();
+    GL11.glOrtho(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 1, -1);
+    GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
-	}
+  }
 
-	@Override
-	public void init() {
-		// Setup an error callback. The default implementation
-		// will print the error message in System.err.
-		GLFWErrorCallback.createPrint(System.err).set();
+  @Override
+  public void init() {
+    // Setup an error callback. The default implementation
+    // will print the error message in System.err.
+    GLFWErrorCallback.createPrint(System.err).set();
 
-		// Initialize GLFW. Most GLFW functions will not work before doing this.
-		if (!glfwInit()) {
-			throw new IllegalStateException("Unable to initialize GLFW");
-		}
+    // Initialize GLFW. Most GLFW functions will not work before doing this.
+    if (!glfwInit()) {
+      throw new IllegalStateException("Unable to initialize GLFW");
+    }
 
-		// Configure our window
-		glfwDefaultWindowHints(); // optional, the current window hints are
-									// already the default
-		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden
-													// after creation
-		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will be
-													// resizable
+    // Configure our window
+    glfwDefaultWindowHints(); // optional, the current window hints are
+    // already the default
+    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden
+    // after creation
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will be
+    // resizable
 
-		int WIDTH = SCREEN_WIDTH;
-		int HEIGHT = SCREEN_HEIGHT;
+    int WIDTH = SCREEN_WIDTH;
+    int HEIGHT = SCREEN_HEIGHT;
 
-		// Create the window
-		window = glfwCreateWindow(WIDTH, HEIGHT, TITLE, NULL, NULL);
-		if (window == NULL)
-			throw new RuntimeException("Failed to create the GLFW window");
+    // Create the window
+    window = glfwCreateWindow(WIDTH, HEIGHT, TITLE, NULL, NULL);
+    if (window == NULL)
+      throw new RuntimeException("Failed to create the GLFW window");
 
-		glfwSetKeyCallback(window, keyCallback);
-		glfwSetCursorPosCallback(window, mouseCallback);
-		org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback(window, mouseButtonCallback);
+    glfwSetKeyCallback(window, keyCallback);
+    glfwSetCursorPosCallback(window, mouseCallback);
+    org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback(window, mouseButtonCallback);
 
-		// Get the resolution of the primary monitor
-		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-		// Center our window
-		glfwSetWindowPos(window, (vidmode.width() - WIDTH) / 2, (vidmode.height() - HEIGHT) / 2);
+    // Get the resolution of the primary monitor
+    GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+    // Center our window
+    glfwSetWindowPos(window, (vidmode.width() - WIDTH) / 2, (vidmode.height() - HEIGHT) / 2);
 
-		// Make the OpenGL context current
-		glfwMakeContextCurrent(window);
-		// Enable v-sync
-		glfwSwapInterval(1);
+    // Make the OpenGL context current
+    glfwMakeContextCurrent(window);
+    // Enable v-sync
+    glfwSwapInterval(1);
 
-		// Make the window visible
-		glfwShowWindow(window);
+    // Make the window visible
+    glfwShowWindow(window);
 
-	}
+  }
 
-	@Override
-	public void startLoop(final Consumer<Double> consumer) {
-		// This line is critical for LWJGL's interoperation with GLFW's
-		// OpenGL context, or any context that is managed externally.
-		// LWJGL detects the context that is current in the current thread,
-		// creates the GLCapabilities instance and makes the OpenGL
-		// bindings available for use.
-		GL.createCapabilities();
-		prepareOPENGL();
-		// Set the clear color
-		glClearColor(1, 1, 1, 1);
-		double delta;
-		long lastTime;
-		long nowTime = java.lang.System.currentTimeMillis();
-		// Run the rendering loop until the user has attempted to close
-		// the window or has pressed the ESCAPE key.
+  @Override
+  public void startLoop(final Consumer<Double> consumer) {
+    // This line is critical for LWJGL's interoperation with GLFW's
+    // OpenGL context, or any context that is managed externally.
+    // LWJGL detects the context that is current in the current thread,
+    // creates the GLCapabilities instance and makes the OpenGL
+    // bindings available for use.
+    GL.createCapabilities();
+    prepareOPENGL();
+    // Set the clear color
+    glClearColor(1, 1, 1, 1);
+    double delta;
+    long lastTime;
+    long nowTime = java.lang.System.currentTimeMillis();
+    // Run the rendering loop until the user has attempted to close
+    // the window or has pressed the ESCAPE key.
 
-		glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_VERTEX_ARRAY);
 
-		glClearColor(43f / 255f, 43f / 255f, 43f / 255f, 0f); // BG color
+    glClearColor(43f / 255f, 43f / 255f, 43f / 255f, 0f); // BG color
 
-		while (!glfwWindowShouldClose(window)) {
-			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+    while (!glfwWindowShouldClose(window)) {
+      GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-			lastTime = nowTime;
-			delta = 0d;
+      lastTime = nowTime;
+      delta = 0d;
 
-			nowTime = java.lang.System.currentTimeMillis();
-			delta = nowTime - lastTime;
+      nowTime = java.lang.System.currentTimeMillis();
+      delta = nowTime - lastTime;
 
-			consumer.accept(delta / 1000d);
+      consumer.accept(delta / 1000d);
 
-			glfwSwapBuffers(window);
+      glfwSwapBuffers(window);
 
-			glfwPollEvents();
-		}
-	}
+      glfwPollEvents();
+    }
+  }
 
-	@Override
-	public void stopLoop() {
-		Callbacks.glfwFreeCallbacks(window);
-		glfwDestroyWindow(window);
-		glfwTerminate();
-		// TODO ??? glfwSetErrorCallback(null).release();
-	}
+  @Override
+  public void stopLoop() {
+    Callbacks.glfwFreeCallbacks(window);
+    glfwDestroyWindow(window);
+    glfwTerminate();
+    // TODO ??? glfwSetErrorCallback(null).release();
+  }
 
 }

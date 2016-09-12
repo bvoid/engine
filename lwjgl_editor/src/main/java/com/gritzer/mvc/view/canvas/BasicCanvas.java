@@ -6,70 +6,70 @@ import com.gritzer.util.math.Polygon;
 
 public abstract class BasicCanvas implements Canvas {
 
-	protected int x, y, w, h;
-	protected Renderer renderer;
-	protected boolean active = true;
-	protected ViewPort bounds;
-	protected int xPointer;
-	protected int yPointer;
-	protected int fontSize;
+  protected int x, y, w, h;
+  protected Renderer renderer;
+  protected boolean active = true;
+  protected ViewPort bounds;
+  protected int xPointer;
+  protected int yPointer;
+  protected int fontSize;
 
-	@Override
-	public void accept(Renderer renderer) {
-		this.fontSize = renderer.getFontSize();
-		this.xPointer = x + 20;
-		this.yPointer = y + 50;
-		this.renderer = renderer;
-		doPaint();
-	}
+  @Override
+  public void accept(Renderer renderer) {
+    this.fontSize = renderer.getFontSize();
+    this.xPointer = x + 20;
+    this.yPointer = y + 50;
+    this.renderer = renderer;
+    doPaint();
+  }
 
-	protected void newLine() {
-		yPointer += fontSize;
+  protected void newLine() {
+    yPointer += fontSize;
 
-	}
+  }
 
-	protected void render(Polygon polygon) {
-		renderer.renderPolygon(polygon);
-	}
+  protected void render(Polygon polygon) {
+    renderer.renderPolygon(polygon);
+  }
 
-	protected BasicCanvas startAt(int i, int j) {
-		xPointer = i;
-		yPointer = j;
-		return this;
-	}
+  protected BasicCanvas startAt(int i, int j) {
+    xPointer = i;
+    yPointer = j;
+    return this;
+  }
 
-	@Override
-	public boolean contains(int x1, int y1) {
-		return x1 >= x && x1 <= (x + w) && y1 >= y && y1 <= (y + h);
-	}
+  @Override
+  public boolean contains(int x1, int y1) {
+    return x1 >= x && x1 <= (x + w) && y1 >= y && y1 <= (y + h);
+  }
 
-	protected BasicCanvas write(String string) {
-		renderer.drawString(string, xPointer, yPointer);
-		return this;
-	}
+  protected BasicCanvas write(String string) {
+    renderer.drawString(string, xPointer, yPointer);
+    return this;
+  }
 
-	protected abstract void doPaint();
+  protected abstract void doPaint();
 
-	public void layout(int x, int y, int w, int h) {
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
-		this.bounds = new ViewPort(x, y, w, h);
-	}
+  public void layout(int x, int y, int w, int h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.bounds = new ViewPort(x, y, w, h);
+  }
 
-	@Override
-	public void setActive(boolean b) {
-		active = b;
-	}
+  @Override
+  public void setActive(boolean b) {
+    active = b;
+  }
 
-	@Override
-	public boolean isActive() {
-		return active;
-	}
+  @Override
+  public boolean isActive() {
+    return active;
+  }
 
-	public ViewPort getBounds() {
-		return bounds;
-	}
+  public ViewPort getBounds() {
+    return bounds;
+  }
 
 }

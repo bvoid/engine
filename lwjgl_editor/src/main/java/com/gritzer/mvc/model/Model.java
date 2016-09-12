@@ -2,8 +2,8 @@ package com.gritzer.mvc.model;
 
 public interface Model {
 
-	void init();
+  void init();
 
-	void update(Double t);
+  void update(Double t);
 
 }

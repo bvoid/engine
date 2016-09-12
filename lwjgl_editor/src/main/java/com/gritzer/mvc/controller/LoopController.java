@@ -12,24 +12,24 @@ import com.gritzer.mvc.view.View;
 @Named
 public class LoopController implements Consumer<Double> {
 
-	@Inject
-	private LoopGenerator loopGenerator;
-	@Inject
-	private View view;
-	@Inject
-	private Model model;
+  @Inject
+  private LoopGenerator loopGenerator;
+  @Inject
+  private View view;
+  @Inject
+  private Model model;
 
-	@PostConstruct
-	public void init() {
-		loopGenerator.init();
-		model.init();
-		view.init();
-		loopGenerator.startLoop(this);
-	}
+  @PostConstruct
+  public void init() {
+    loopGenerator.init();
+    model.init();
+    view.init();
+    loopGenerator.startLoop(this);
+  }
 
-	@Override
-	public void accept(Double t) {
-		model.update(t);
-		view.render();
-	}
+  @Override
+  public void accept(Double t) {
+    model.update(t);
+    view.render();
+  }
 }

@@ -4,9 +4,9 @@ import java.util.function.Consumer;
 
 public interface LoopGenerator {
 
-	void startLoop(final Consumer<Double> consumer);
+  void startLoop(final Consumer<Double> consumer);
 
-	public void stopLoop();
+  public void stopLoop();
 
-	void init();
+  void init();
 }

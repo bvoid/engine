@@ -10,66 +10,65 @@ import com.gritzer.mvc.model.PolygonBot;
 @Named
 public class PolygonBotInfoCanvas extends BasicCanvas {
 
-	private Map<String, String> info;
-	private PolygonBot bot;
-	private Function<PolygonBot, Map<String, String>> updateFunction;
-	private float mouseX;
-	private float mouseY;
+  private Map<String, String> info;
+  private PolygonBot bot;
+  private Function<PolygonBot, Map<String, String>> updateFunction;
+  private float mouseX;
+  private float mouseY;
 
-	@Override
-	protected void doPaint() {
-		renderer.drawString(mouseX + " , " + mouseY, 100, 100);
-		update();
-		if (info == null) {
-			return;
-		}
-		drawBackGround();
-		drawInfo();
-	}
+  @Override
+  protected void doPaint() {
+    renderer.drawString(mouseX + " , " + mouseY, 100, 100);
+    update();
+    if (info == null) {
+      return;
+    }
+    drawBackGround();
+    drawInfo();
+  }
 
-	// TODO enable renderer.drawPolyonStatic
-	private void drawBackGround() {
-		// Rectangle r = new Rectangle(w, (info.size() * fontSize) + 50);
-		// r.setColor(Colors.BLUE);
-		// r.setX(x);
-		// r.setY(y);
-		// renderer.drawPolyonStatic(r);
-	}
+  // TODO enable renderer.drawPolyonStatic
+  private void drawBackGround() {
+    // Rectangle r = new Rectangle(w, (info.size() * fontSize) + 50);
+    // r.setColor(Colors.BLUE);
+    // r.setX(x);
+    // r.setY(y);
+    // renderer.drawPolyonStatic(r);
+  }
 
-	private void drawInfo() {
-		for (String key : info.keySet()) {
-			write(key);
-			xPointer += 50;
-			write(info.get(key));
-			xPointer -= 50;
-			newLine();
-		}
-	}
+  private void drawInfo() {
+    for (String key : info.keySet()) {
+      write(key);
+      xPointer += 50;
+      write(info.get(key));
+      xPointer -= 50;
+      newLine();
+    }
+  }
 
-	public void update() {
-		if (updateFunction == null) {
-			return;
-		}
-		info = updateFunction.apply(bot);
-	}
+  public void update() {
+    if (updateFunction == null) {
+      return;
+    }
+    info = updateFunction.apply(bot);
+  }
 
-	public void setInfo(PolygonBot p,
-			Function<PolygonBot, Map<String, String>> updateFunction) {
-		this.bot = p;
-		this.updateFunction = updateFunction;
-		update();
-	}
+  public void setInfo(PolygonBot p, Function<PolygonBot, Map<String, String>> updateFunction) {
+    this.bot = p;
+    this.updateFunction = updateFunction;
+    update();
+  }
 
-	public void checkUpdate(PolygonBot selected) {
-		if (selected != null && selected == bot) {
-			update();
-		}
-	}
+  public void checkUpdate(PolygonBot selected) {
+    if (selected != null && selected == bot) {
+      update();
+    }
+  }
 
-	public void renderMouse(float x, float y) {
-		// TODO remove
-		this.mouseX = x;
-		this.mouseY = y;
-	}
+  public void renderMouse(float x, float y) {
+    // TODO remove
+    this.mouseX = x;
+    this.mouseY = y;
+  }
 
 }

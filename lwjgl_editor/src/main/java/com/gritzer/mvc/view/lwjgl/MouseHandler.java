@@ -10,14 +10,14 @@ import com.gritzer.mvc.view.event.EventController;
 @Named
 public class MouseHandler extends GLFWCursorPosCallback {
 
-	@Inject
-	private EventController eventController;
+  @Inject
+  private EventController eventController;
 
-	public long y = 0;
-	public long x = 0;
+  public long y = 0;
+  public long x = 0;
 
-	@Override
-	public void invoke(long window, double xpos, double ypos) {
-		eventController.mouseMoved(xpos, ypos);
-	}
+  @Override
+  public void invoke(long window, double xpos, double ypos) {
+    eventController.mouseMoved(xpos, ypos);
+  }
 }

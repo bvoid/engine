@@ -4,46 +4,46 @@ import java.io.Serializable;
 
 public interface PhysicalState extends Serializable {
 
-	PhysicalState update(double time);
+  PhysicalState update(double time);
 
-	PhysicalState setDirection(double x, double y);
+  PhysicalState setDirection(double x, double y);
 
-	PhysicalState relocate(double x, double y);
+  PhysicalState relocate(double x, double y);
 
-	PhysicalState decelerate(double d, double time);
+  PhysicalState decelerate(double d, double time);
 
-	PhysicalState accelerate(Vector direction, double time);
+  PhysicalState accelerate(Vector direction, double time);
 
-	PhysicalState accelerate(double time);
+  PhysicalState accelerate(double time);
 
-	PhysicalState stop();
+  PhysicalState stop();
 
-	PhysicalState correctMomentum(double time);
+  PhysicalState correctMomentum(double time);
 
-	Vector getDirection();
+  Vector getDirection();
 
-	Vector getMomentum();
+  Vector getMomentum();
 
-	Vector getPosition();
+  Vector getPosition();
 
-	double getVelocity();
+  double getVelocity();
 
-	double getTheta();
+  double getTheta();
 
-	double getX();
+  double getX();
 
-	double getY();
+  double getY();
 
-	double getThrust();
+  double getThrust();
 
-	double getMass();
+  double getMass();
 
-	void setThrust(double thrust);
+  void setThrust(double thrust);
 
-	void setDirection(Vector vector);
+  void setDirection(Vector vector);
 
-	void setMass(double i);
+  void setMass(double i);
 
-	void setTheta(double direction);
+  void setTheta(double direction);
 
 }
