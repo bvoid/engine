@@ -5,6 +5,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_RESIZABLE;
 import static org.lwjgl.glfw.GLFW.GLFW_VISIBLE;
 import static org.lwjgl.glfw.GLFW.glfwCreateWindow;
 import static org.lwjgl.glfw.GLFW.glfwDefaultWindowHints;
+import static org.lwjgl.glfw.GLFW.glfwDestroyWindow;
 import static org.lwjgl.glfw.GLFW.glfwGetPrimaryMonitor;
 import static org.lwjgl.glfw.GLFW.glfwGetVideoMode;
 import static org.lwjgl.glfw.GLFW.glfwInit;
@@ -16,6 +17,7 @@ import static org.lwjgl.glfw.GLFW.glfwSetWindowPos;
 import static org.lwjgl.glfw.GLFW.glfwShowWindow;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.glfw.GLFW.glfwSwapInterval;
+import static org.lwjgl.glfw.GLFW.glfwTerminate;
 import static org.lwjgl.glfw.GLFW.glfwWindowHint;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_VERTEX_ARRAY;
@@ -28,6 +30,7 @@ import java.util.function.Consumer;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
@@ -41,8 +44,10 @@ import com.gritzer.mvc.controller.LoopGenerator;
 @Named
 public class LwjglLoopGenerator implements LoopGenerator {
 
-	public static final int SCREEN_HEIGHT = 1025;
-	public static final int SCREEN_WIDTH = 1920;
+	private static final String TITLE = "LWJGL SPACE";
+
+	private static final int SCREEN_WIDTH = 1920;
+	private static final int SCREEN_HEIGHT = 1025;
 
 	@Inject
 	private GLFWKeyCallback keyCallback;
@@ -68,8 +73,9 @@ public class LwjglLoopGenerator implements LoopGenerator {
 		GLFWErrorCallback.createPrint(System.err).set();
 
 		// Initialize GLFW. Most GLFW functions will not work before doing this.
-		if (!glfwInit())
+		if (!glfwInit()) {
 			throw new IllegalStateException("Unable to initialize GLFW");
+		}
 
 		// Configure our window
 		glfwDefaultWindowHints(); // optional, the current window hints are
@@ -83,20 +89,18 @@ public class LwjglLoopGenerator implements LoopGenerator {
 		int HEIGHT = SCREEN_HEIGHT;
 
 		// Create the window
-		window = glfwCreateWindow(WIDTH, HEIGHT, "LWJGL SPACE", NULL, NULL);
+		window = glfwCreateWindow(WIDTH, HEIGHT, TITLE, NULL, NULL);
 		if (window == NULL)
 			throw new RuntimeException("Failed to create the GLFW window");
 
 		glfwSetKeyCallback(window, keyCallback);
 		glfwSetCursorPosCallback(window, mouseCallback);
-		org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback(window,
-				mouseButtonCallback);
+		org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback(window, mouseButtonCallback);
 
 		// Get the resolution of the primary monitor
 		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 		// Center our window
-		glfwSetWindowPos(window, (vidmode.width() - WIDTH) / 2,
-				(vidmode.height() - HEIGHT) / 2);
+		glfwSetWindowPos(window, (vidmode.width() - WIDTH) / 2, (vidmode.height() - HEIGHT) / 2);
 
 		// Make the OpenGL context current
 		glfwMakeContextCurrent(window);
@@ -148,7 +152,10 @@ public class LwjglLoopGenerator implements LoopGenerator {
 
 	@Override
 	public void stopLoop() {
-		// TODO needed?
+		Callbacks.glfwFreeCallbacks(window);
+		glfwDestroyWindow(window);
+		glfwTerminate();
+		// TODO ??? glfwSetErrorCallback(null).release();
 	}
 
 }
