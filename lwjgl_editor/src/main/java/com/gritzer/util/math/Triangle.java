@@ -10,4 +10,5 @@ public class Triangle extends Polygon {
     w = (int) a;
     h = (int) b;
   }
+
 }

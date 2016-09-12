@@ -26,4 +26,5 @@ public class EditorView implements View {
   public void render() {
     canvasHolder.get().filter(canvasFilter).forEach(c -> c.accept(renderer));
   }
+
 }

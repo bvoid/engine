@@ -20,7 +20,8 @@ public class EditorEventController implements EventController {
   private PolygonBotInfoCanvas infoCanvas;
   @Inject
   private Camera camera;
-  private int pointerX, pointerY;
+  private int pointerX;
+  private int pointerY;
 
   @Override
   public void keyReleased(int inputConstant) {
@@ -79,11 +80,8 @@ public class EditorEventController implements EventController {
   }
 
   private void moveTo() {
-    editorModel
-        .getBots()
-        .stream()
-        .forEach(
-            b -> b.setTarget(camera.translateXToModel(pointerX), camera.translateYToModel(pointerY)));
+    editorModel.getBots().stream().forEach(
+        b -> b.setTarget(camera.translateXToModel(pointerX), camera.translateYToModel(pointerY)));
   }
 
   private void select() {
@@ -111,4 +109,5 @@ public class EditorEventController implements EventController {
   private float toXModel(int x) {
     return camera.translateXToModel(x);
   }
+
 }

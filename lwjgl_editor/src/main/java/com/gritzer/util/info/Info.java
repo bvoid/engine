@@ -7,6 +7,7 @@ import java.util.function.Function;
 import com.gritzer.mvc.model.PolygonBot;
 
 public class Info {
+
   /**
    * Retrieves properties of the given Polygon.
    */
@@ -18,6 +19,7 @@ public class Info {
       if (p == null) {
         return null;
       }
+
       final Map<String, String> properties = new LinkedHashMap<>();
       properties.put("type", "" + p.getClass().getSimpleName());
       properties.put("x", "" + p.getX());
@@ -32,13 +34,13 @@ public class Info {
   }
 
   private static String calculateDegrees(float theta) {
-
     long degrees = Math.round(Math.toDegrees(theta));
+
     if (degrees < 0) {
       return "" + (180 + (180 + degrees));
     }
-    return "" + degrees;
 
+    return "" + degrees;
   }
 
 }

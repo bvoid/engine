@@ -25,8 +25,8 @@ public class LwjglRenderer implements Renderer {
 
   @Override
   public Renderer renderPolygon(Polygon p) {
-    Color c = p.getColor();
-    GL11.glColor3f(c.getR() / 255f, c.getG() / 255f, c.getB() / 255f);
+    Color color = p.getColor();
+    GL11.glColor3f(color.getR() / 255f, color.getG() / 255f, color.getB() / 255f);
 
     GL11.glBegin(GL11.GL_POLYGON);
     for (int i = 0; i < p.getxPoints().length; i++) {

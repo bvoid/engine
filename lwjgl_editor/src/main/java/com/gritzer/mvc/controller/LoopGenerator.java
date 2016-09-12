@@ -9,4 +9,5 @@ public interface LoopGenerator {
   public void stopLoop();
 
   void init();
+
 }

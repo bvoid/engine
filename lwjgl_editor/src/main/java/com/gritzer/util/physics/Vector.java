@@ -100,7 +100,6 @@ public class Vector implements Serializable {
     }
     scalar = (int) Math.abs(((x2 - x1) + (y2 - y1)) / 2);
     return sign + "|" + scalar + "| " + "[" + x1 + "] [" + y1 + "] [" + x2 + "] [" + y2 + "]";
-
   }
 
 }

@@ -14,8 +14,8 @@ public enum Colors {
   public static final Color DARK_GRAY = new Color(60, 60, 60);
   public static final Color BLACK = new Color(0, 0, 0);
 
-  public static final Color[] COLORS = new Color[] {RED, GREEN, BLUE, PINK, TURQ, YELLOW, WHITE,
-      LIGHT_GRAY, GRAY, DARK_GRAY};
+  public static final Color[] COLORS =
+      new Color[] {RED, GREEN, BLUE, PINK, TURQ, YELLOW, WHITE, LIGHT_GRAY, GRAY, DARK_GRAY};
 
   public static Color random() {
     int r, g, b = 0;
@@ -24,4 +24,5 @@ public enum Colors {
     b = (int) (((Math.random() * 255) + 255) / 2);
     return new Color(r, g, b);
   }
+
 }

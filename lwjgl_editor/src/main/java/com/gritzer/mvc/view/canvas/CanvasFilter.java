@@ -8,8 +8,8 @@ import javax.inject.Named;
 public class CanvasFilter implements Predicate<Canvas> {
 
   @Override
-  public boolean test(Canvas t) {
-    return t.isActive();
+  public boolean test(Canvas canvas) {
+    return canvas.isActive();
   }
 
 }

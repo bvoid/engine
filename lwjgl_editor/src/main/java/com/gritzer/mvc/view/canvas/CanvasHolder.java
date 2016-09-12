@@ -31,4 +31,5 @@ public class CanvasHolder implements Supplier<Stream<Canvas>> {
   private void fullScreen(Canvas canvas) {
     canvas.layout(0, 0, 1920, 1050);
   }
+
 }

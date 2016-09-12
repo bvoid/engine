@@ -53,8 +53,8 @@ public class PolygonBotInfoCanvas extends BasicCanvas {
     info = updateFunction.apply(bot);
   }
 
-  public void setInfo(PolygonBot p, Function<PolygonBot, Map<String, String>> updateFunction) {
-    this.bot = p;
+  public void setInfo(PolygonBot bot, Function<PolygonBot, Map<String, String>> updateFunction) {
+    this.bot = bot;
     this.updateFunction = updateFunction;
     update();
   }

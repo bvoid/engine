@@ -54,4 +54,5 @@ public class InputConstants {
   public static final int NUMBER_2 = 46;
   public static final int NUMBER_3 = 47;
   public static final int BACKSPACE = 45;
+
 }

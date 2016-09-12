@@ -6,7 +6,10 @@ import com.gritzer.util.math.Polygon;
 
 public abstract class BasicCanvas implements Canvas {
 
-  protected int x, y, w, h;
+  protected int x;
+  protected int y;
+  protected int w;
+  protected int h;
   protected Renderer renderer;
   protected boolean active = true;
   protected ViewPort bounds;
@@ -25,16 +28,15 @@ public abstract class BasicCanvas implements Canvas {
 
   protected void newLine() {
     yPointer += fontSize;
-
   }
 
   protected void render(Polygon polygon) {
     renderer.renderPolygon(polygon);
   }
 
-  protected BasicCanvas startAt(int i, int j) {
-    xPointer = i;
-    yPointer = j;
+  protected BasicCanvas startAt(int xPointer, int yPointer) {
+    this.xPointer = xPointer;
+    this.yPointer = yPointer;
     return this;
   }
 
@@ -50,6 +52,7 @@ public abstract class BasicCanvas implements Canvas {
 
   protected abstract void doPaint();
 
+  @Override
   public void layout(int x, int y, int w, int h) {
     this.x = x;
     this.y = y;
@@ -68,6 +71,7 @@ public abstract class BasicCanvas implements Canvas {
     return active;
   }
 
+  @Override
   public ViewPort getBounds() {
     return bounds;
   }

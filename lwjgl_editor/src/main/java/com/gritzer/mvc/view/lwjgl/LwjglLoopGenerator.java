@@ -63,7 +63,6 @@ public class LwjglLoopGenerator implements LoopGenerator {
     GL11.glLoadIdentity();
     GL11.glOrtho(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 1, -1);
     GL11.glMatrixMode(GL11.GL_MODELVIEW);
-
   }
 
   @Override
@@ -85,13 +84,14 @@ public class LwjglLoopGenerator implements LoopGenerator {
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will be
     // resizable
 
-    int WIDTH = SCREEN_WIDTH;
-    int HEIGHT = SCREEN_HEIGHT;
+    int width = SCREEN_WIDTH;
+    int height = SCREEN_HEIGHT;
 
     // Create the window
-    window = glfwCreateWindow(WIDTH, HEIGHT, TITLE, NULL, NULL);
-    if (window == NULL)
+    window = glfwCreateWindow(width, height, TITLE, NULL, NULL);
+    if (window == NULL) {
       throw new RuntimeException("Failed to create the GLFW window");
+    }
 
     glfwSetKeyCallback(window, keyCallback);
     glfwSetCursorPosCallback(window, mouseCallback);
@@ -100,7 +100,7 @@ public class LwjglLoopGenerator implements LoopGenerator {
     // Get the resolution of the primary monitor
     GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
     // Center our window
-    glfwSetWindowPos(window, (vidmode.width() - WIDTH) / 2, (vidmode.height() - HEIGHT) / 2);
+    glfwSetWindowPos(window, (vidmode.width() - width) / 2, (vidmode.height() - height) / 2);
 
     // Make the OpenGL context current
     glfwMakeContextCurrent(window);

@@ -20,4 +20,5 @@ public class MouseHandler extends GLFWCursorPosCallback {
   public void invoke(long window, double xpos, double ypos) {
     eventController.mouseMoved(xpos, ypos);
   }
+
 }

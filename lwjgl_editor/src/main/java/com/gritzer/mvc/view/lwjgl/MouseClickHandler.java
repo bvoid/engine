@@ -10,6 +10,7 @@ import com.gritzer.mvc.view.event.InputConstants;
 
 @Named
 public class MouseClickHandler extends GLFWMouseButtonCallback {
+
   @Inject
   private EventController eventController;
 

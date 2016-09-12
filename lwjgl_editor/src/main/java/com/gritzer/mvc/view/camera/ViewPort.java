@@ -72,9 +72,8 @@ public class ViewPort {
   }
 
   public boolean contains(ViewPort other) {
-    return new java.awt.Rectangle((int) x, (int) y, (int) w, (int) h)
-        .intersects(new java.awt.Rectangle((int) other.x, (int) other.y, (int) other.w,
-            (int) other.h));
+    return new java.awt.Rectangle((int) x, (int) y, (int) w, (int) h).intersects(
+        new java.awt.Rectangle((int) other.x, (int) other.y, (int) other.w, (int) other.h));
   }
 
   public void setRect(double x2, double y2, double d, double e) {

@@ -28,8 +28,9 @@ public class LoopController implements Consumer<Double> {
   }
 
   @Override
-  public void accept(Double t) {
-    model.update(t);
+  public void accept(Double time) {
+    model.update(time);
     view.render();
   }
+
 }

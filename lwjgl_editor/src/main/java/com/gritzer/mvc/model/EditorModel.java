@@ -57,4 +57,5 @@ public class EditorModel implements Model {
   public List<PolygonBot> getBots() {
     return bots;
   }
+
 }

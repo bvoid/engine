@@ -33,4 +33,5 @@ public class EditorSimCanvas extends BasicCanvas {
     return camera.isInView(getBounds(),
         new ViewPort(bot.getX(), bot.getY(), bot.getW(), bot.getH()));
   }
+
 }

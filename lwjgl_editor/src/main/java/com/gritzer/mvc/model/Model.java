@@ -4,6 +4,6 @@ public interface Model {
 
   void init();
 
-  void update(Double t);
+  void update(Double time);
 
 }

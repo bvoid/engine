@@ -12,6 +12,7 @@ import com.gritzer.mvc.view.event.InputConstants;
 
 @Named
 public class KeyHandler extends GLFWKeyCallback {
+
   @Inject
   private EventController eventController;
 
