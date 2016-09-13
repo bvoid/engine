@@ -1,10 +1,20 @@
 package org.bvoid.engine.core;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.bvoid.engine.core.close.Closer;
+import org.bvoid.engine.core.init.Initializer;
 
 @Named
 public class Engine {
+
+  @Inject
+  private Initializer initializer;
+
+  @Inject
+  private Closer closer;
 
   /**
    * Run the engine.
@@ -20,7 +30,7 @@ public class Engine {
   }
 
   private void init() {
-    // TODO
+    initializer.init();
   }
 
   private void loop() {
@@ -40,7 +50,7 @@ public class Engine {
   }
 
   private void close() {
-    // TODO
+    closer.close();
   }
 
 }
