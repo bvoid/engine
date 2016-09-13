@@ -1,14 +1,19 @@
 package org.bvoid.engine.core;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Named;
+
+@Named
 public class Engine {
 
   /**
    * Run the engine.
    */
+  @PostConstruct
   public void run() {
     try {
-      // init();
-      // loop();
+      init();
+      loop();
     } finally {
       close();
     }
