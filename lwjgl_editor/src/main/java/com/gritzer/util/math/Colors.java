@@ -18,11 +18,10 @@ public enum Colors {
       new Color[] {RED, GREEN, BLUE, PINK, TURQ, YELLOW, WHITE, LIGHT_GRAY, GRAY, DARK_GRAY};
 
   public static Color random() {
-    int r, g, b = 0;
-    r = (int) (((Math.random() * 255) + 255) / 2);
-    g = (int) (((Math.random() * 255) + 255) / 2);
-    b = (int) (((Math.random() * 255) + 255) / 2);
-    return new Color(r, g, b);
+    final int red = (int) (((Math.random() * 255) + 255) / 2);
+    final int green = (int) (((Math.random() * 255) + 255) / 2);
+    final int blue = (int) (((Math.random() * 255) + 255) / 2);
+    return new Color(red, green, blue);
   }
 
 }
