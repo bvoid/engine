@@ -8,8 +8,6 @@ import javax.inject.Named;
 import com.gritzer.util.math.Polygon;
 import com.gritzer.util.math.Polygons;
 import com.gritzer.util.math.Rectangle;
-import com.gritzer.util.math.Square;
-import com.gritzer.util.math.Triangle;
 
 @Named
 public class EditorModel implements Model {

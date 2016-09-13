@@ -8,6 +8,7 @@ import com.gritzer.mvc.model.PolygonBot;
 import com.gritzer.mvc.view.camera.Camera;
 import com.gritzer.mvc.view.canvas.PolygonBotInfoCanvas;
 import com.gritzer.mvc.view.event.EventController;
+import com.gritzer.mvc.view.event.Input;
 import com.gritzer.mvc.view.event.InputConstants;
 import com.gritzer.util.info.Info;
 
@@ -80,8 +81,11 @@ public class EditorEventController implements EventController {
   }
 
   private void moveTo() {
-    editorModel.getBots().stream().forEach(
-        b -> b.setTarget(camera.translateXToModel(pointerX), camera.translateYToModel(pointerY)));
+    editorModel
+        .getBots()
+        .stream()
+        .forEach(
+            b -> b.setTarget(camera.translateXToModel(pointerX), camera.translateYToModel(pointerY)));
   }
 
   private void select() {
@@ -108,6 +112,11 @@ public class EditorEventController implements EventController {
 
   private float toXModel(int x) {
     return camera.translateXToModel(x);
+  }
+
+  @Override
+  public void mouseWheelMoved(double wheelDirection) {
+    camera.zoom((int) -wheelDirection, pointerX, pointerY);
   }
 
 }

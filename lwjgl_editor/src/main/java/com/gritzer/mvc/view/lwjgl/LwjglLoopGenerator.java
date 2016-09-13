@@ -35,6 +35,7 @@ import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
+import org.lwjgl.glfw.GLFWScrollCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
@@ -55,6 +56,8 @@ public class LwjglLoopGenerator implements LoopGenerator {
   private GLFWCursorPosCallback mouseCallback;
   @Inject
   private GLFWMouseButtonCallback mouseButtonCallback;
+  @Inject
+  private GLFWScrollCallback mouseWheelCallback;
 
   private long window;
 
@@ -96,6 +99,7 @@ public class LwjglLoopGenerator implements LoopGenerator {
     glfwSetKeyCallback(window, keyCallback);
     glfwSetCursorPosCallback(window, mouseCallback);
     org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback(window, mouseButtonCallback);
+    org.lwjgl.glfw.GLFW.glfwSetScrollCallback(window, mouseWheelCallback);
 
     // Get the resolution of the primary monitor
     GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());

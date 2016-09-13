@@ -10,6 +10,10 @@ public interface EventController {
 
   void mouseReleased(int inputConstant);
 
+  void mouseWheelMoved(double wheelDirection);
+
   void mouseMoved(double xpos, double ypos);
+
+
 
 }
