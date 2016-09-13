@@ -18,29 +18,16 @@ public class EditorModel implements Model {
 
   @Override
   public void init() {
-    final Polygon poly = new Rectangle(200, 100);
-    poly.setX(-50);
-    poly.setY(-50);
-    final PolygonBot bot = new PolygonBot(poly);
-    bot.setPosition(100f, 300f);
-    bot.setTarget(bot.getX(), bot.getY());
-    bots.add(bot);
+    for (int i = 0; i < 20000; i++) {
+      final Polygon poly = new Rectangle(2, 2);
+      poly.setX(-1);
+      poly.setY(-1);
+      final PolygonBot bot = new PolygonBot(poly);
+      bot.setPosition((float) (Math.random() * 1900), (float) (Math.random() * 1000));
+      bot.setTarget(bot.getX(), bot.getY());
+      bots.add(bot);
+    }
 
-    final Polygon poly2 = new Square(100);
-    poly2.setX(-50);
-    poly2.setY(-50);
-    final PolygonBot bot2 = new PolygonBot(poly2);
-    bot2.setPosition(100f, 500f);
-    bot2.setTarget(bot2.getX(), bot2.getY());
-    bots.add(bot2);
-
-    final Polygon poly3 = new Triangle(100, 100);
-    poly3.setX(-50);
-    poly3.setY(-50);
-    final PolygonBot bot3 = new PolygonBot(poly3);
-    bot3.setPosition(100f, 700f);
-    bot3.setTarget(bot3.getX(), bot3.getY());
-    bots.add(bot3);
   }
 
   @Override
