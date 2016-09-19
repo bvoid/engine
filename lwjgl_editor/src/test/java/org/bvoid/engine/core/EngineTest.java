@@ -18,6 +18,7 @@ import org.mockito.verification.VerificationMode;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EngineTest {
+
   private static final VerificationMode ONCE = times(1);
   private static final VerificationMode TWICE = times(2);
 
@@ -45,8 +46,8 @@ public class EngineTest {
 
   @Test
   public void testRunTwice() throws Exception {
-    when(engineStateHolder.getState()).thenReturn(EngineState.RUNNING).thenReturn(
-        EngineState.PAUSED);
+    when(engineStateHolder.getState()).thenReturn(EngineState.RUNNING)
+        .thenReturn(EngineState.PAUSED);
 
     classUnderTest.run();
 
@@ -54,4 +55,5 @@ public class EngineTest {
     verify(cameraUpdateSevice, TWICE).update();
     verify(closer, ONCE).close();
   }
+
 }
