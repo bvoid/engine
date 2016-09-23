@@ -1,19 +1,14 @@
-package org.bvoid.engine.gfx.window;
+package org.bvoid.engine.monitor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-public class MonitorTest {
+public class GlfwMonitorTest {
 
   private static final long SAMPLE_HANDLE = 0xDEAD;
 
-  private final Monitor classUnderTest = new Monitor(SAMPLE_HANDLE);
-
-  @Test
-  public void testGetHandle() throws Exception {
-    assertThat(classUnderTest.getHandle()).isEqualTo(SAMPLE_HANDLE);
-  }
+  private final GlfwMonitor classUnderTest = new GlfwMonitor(SAMPLE_HANDLE);
 
   @Test
   public void testGetName() throws Exception {

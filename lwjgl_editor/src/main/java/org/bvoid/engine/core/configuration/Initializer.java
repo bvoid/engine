@@ -1,4 +1,4 @@
-package org.bvoid.engine.core.init;
+package org.bvoid.engine.core.configuration;
 
 public interface Initializer {
 

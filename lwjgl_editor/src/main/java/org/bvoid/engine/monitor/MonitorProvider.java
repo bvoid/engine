@@ -1,8 +1,8 @@
-package org.bvoid.engine.gfx.window;
+package org.bvoid.engine.monitor;
 
 import java.util.Collection;
 
-public interface MonitorService {
+public interface MonitorProvider {
 
   Monitor getPrimaryMonitor();
 

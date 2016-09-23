@@ -1,4 +1,4 @@
-package org.bvoid.engine.gfx.window;
+package org.bvoid.engine.window;
 
 import static org.lwjgl.glfw.GLFW.glfwDestroyWindow;
 import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
@@ -13,6 +13,7 @@ import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 import java.nio.IntBuffer;
 
+import org.bvoid.engine.monitor.Monitor;
 import org.joml.Vector2i;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWImage.Buffer;

@@ -1,4 +1,4 @@
-package org.bvoid.engine.core.close;
+package org.bvoid.engine.core.configuration;
 
 public interface Closer {
 

@@ -4,11 +4,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.bvoid.engine.core.close.Closer;
-import org.bvoid.engine.core.init.Initializer;
 import org.bvoid.engine.core.state.EngineState;
 import org.bvoid.engine.core.state.EngineStateHolder;
 import org.bvoid.engine.gfx.camera.CameraUpdateService;
+import org.bvoid.engine.window.WindowCloser;
+import org.bvoid.engine.window.WindowInitializer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,10 +24,13 @@ public class EngineTest {
 
   @InjectMocks
   private Engine classUnderTest;
+
   @Mock
-  private Initializer initializer;
+  private WindowInitializer windowInitializer;
+
   @Mock
-  private Closer closer;
+  private WindowCloser windowCloser;
+
   @Mock
   private CameraUpdateService cameraUpdateSevice;
   @Mock
@@ -39,9 +42,9 @@ public class EngineTest {
 
     classUnderTest.run();
 
-    verify(initializer, ONCE).init();
+    verify(windowInitializer, ONCE).init();
     verify(cameraUpdateSevice, ONCE).update();
-    verify(closer, ONCE).close();
+    verify(windowCloser, ONCE).close();
   }
 
   @Test
@@ -51,9 +54,9 @@ public class EngineTest {
 
     classUnderTest.run();
 
-    verify(initializer, ONCE).init();
+    verify(windowInitializer, ONCE).init();
     verify(cameraUpdateSevice, TWICE).update();
-    verify(closer, ONCE).close();
+    verify(windowCloser, ONCE).close();
   }
 
 }

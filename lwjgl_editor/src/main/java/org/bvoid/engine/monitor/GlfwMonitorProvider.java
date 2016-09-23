@@ -1,4 +1,4 @@
-package org.bvoid.engine.gfx.window;
+package org.bvoid.engine.monitor;
 
 import static org.lwjgl.glfw.GLFW.glfwGetMonitors;
 import static org.lwjgl.glfw.GLFW.glfwGetPrimaryMonitor;
@@ -11,12 +11,12 @@ import javax.inject.Named;
 import org.lwjgl.PointerBuffer;
 
 @Named
-public class DefaultMonitorService implements MonitorService {
+public class GlfwMonitorProvider implements MonitorProvider {
 
   @Override
   public Monitor getPrimaryMonitor() {
     final long handle = glfwGetPrimaryMonitor();
-    return new Monitor(handle);
+    return new GlfwMonitor(handle); // TODO
   }
 
   @Override
@@ -30,7 +30,7 @@ public class DefaultMonitorService implements MonitorService {
 
     while (handles.hasRemaining()) {
       final long handle = handles.get();
-      final Monitor monitor = new Monitor(handle);
+      final Monitor monitor = new GlfwMonitor(handle);
       monitors.add(monitor);
     }
 

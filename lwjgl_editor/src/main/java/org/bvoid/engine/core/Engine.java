@@ -4,19 +4,21 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.bvoid.engine.core.close.Closer;
-import org.bvoid.engine.core.init.Initializer;
 import org.bvoid.engine.core.state.EngineState;
 import org.bvoid.engine.core.state.EngineStateHolder;
 import org.bvoid.engine.gfx.camera.CameraUpdateService;
+import org.bvoid.engine.window.WindowCloser;
+import org.bvoid.engine.window.WindowInitializer;
 
 @Named
 public class Engine {
 
   @Inject
-  private Initializer initializer;
+  private WindowInitializer windowInitializer;
+
   @Inject
-  private Closer closer;
+  private WindowCloser windowCloser;
+
   @Inject
   private CameraUpdateService cameraUpdateService;
   @Inject
@@ -38,12 +40,11 @@ public class Engine {
   }
 
   private void init() {
-    initializer.init();
+    windowInitializer.init();
   }
 
   private void loop() {
     while (!paused) {
-
       // (1) Input
       // (2) GameLogic
       // (3) Camera
@@ -60,7 +61,7 @@ public class Engine {
   }
 
   private void close() {
-    closer.close();
+    windowCloser.close();
   }
 
 }

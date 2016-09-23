@@ -1,4 +1,4 @@
-package org.bvoid.engine.gfx.window;
+package org.bvoid.engine.monitor;
 
 import static org.lwjgl.glfw.GLFW.glfwGetMonitorName;
 import static org.lwjgl.glfw.GLFW.glfwGetVideoMode;
@@ -6,22 +6,20 @@ import static org.lwjgl.glfw.GLFW.glfwGetVideoMode;
 import org.joml.Vector2i;
 import org.lwjgl.glfw.GLFWVidMode;
 
-public class Monitor {
+public class GlfwMonitor implements Monitor {
 
   private final long handle;
 
-  public Monitor(final long handle) {
+  public GlfwMonitor(final long handle) {
     this.handle = handle;
   }
 
-  public long getHandle() {
-    return handle;
-  }
-
+  @Override
   public String getName() {
     return glfwGetMonitorName(handle);
   }
 
+  @Override
   public Vector2i getSize() {
     final GLFWVidMode videoMode = glfwGetVideoMode(handle);
 

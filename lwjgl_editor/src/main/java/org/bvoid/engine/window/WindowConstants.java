@@ -1,4 +1,4 @@
-package org.bvoid.engine.gfx.window;
+package org.bvoid.engine.window;
 
 import org.joml.Vector2i;
 

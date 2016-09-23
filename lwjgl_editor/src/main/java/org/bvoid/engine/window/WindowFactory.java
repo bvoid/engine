@@ -1,7 +1,7 @@
-package org.bvoid.engine.gfx.window;
+package org.bvoid.engine.window;
 
-import static org.bvoid.engine.gfx.window.WindowConstants.DEFAULT_SIZE;
-import static org.bvoid.engine.gfx.window.WindowConstants.DEFAULT_TITLE;
+import static org.bvoid.engine.window.WindowConstants.DEFAULT_SIZE;
+import static org.bvoid.engine.window.WindowConstants.DEFAULT_TITLE;
 import static org.lwjgl.glfw.GLFW.GLFW_FALSE;
 import static org.lwjgl.glfw.GLFW.GLFW_RESIZABLE;
 import static org.lwjgl.glfw.GLFW.GLFW_TRUE;
@@ -16,7 +16,7 @@ import javax.inject.Named;
 import org.joml.Vector2i;
 
 @Named
-public class WindowService {
+public class WindowFactory {
 
   public Window createWindow() {
     return createWindow(DEFAULT_SIZE, DEFAULT_TITLE);
