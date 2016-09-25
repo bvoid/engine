@@ -6,9 +6,9 @@ import javax.inject.Named;
 
 import org.bvoid.engine.core.close.Closer;
 import org.bvoid.engine.core.init.Initializer;
-import org.bvoid.engine.core.state.EngineState;
-import org.bvoid.engine.core.state.EngineStateHolder;
 import org.bvoid.engine.gfx.camera.CameraUpdateService;
+import org.bvoid.engine.gfx.view.View;
+import org.bvoid.engine.input.InputService;
 
 @Named
 public class Engine {
@@ -20,9 +20,9 @@ public class Engine {
   @Inject
   private CameraUpdateService cameraUpdateService;
   @Inject
-  private EngineStateHolder engineStateHolder;
-
-  private boolean paused = false;
+  private InputService inputService;
+  @Inject
+  private View view;
 
   /**
    * Run the engine.
@@ -42,9 +42,9 @@ public class Engine {
   }
 
   private void loop() {
-    while (!paused) {
-
+    while (!view.shouldClose()) {
       // (1) Input
+      inputService.update();
       // (2) GameLogic
       // (3) Camera
       cameraUpdateService.update();
@@ -54,8 +54,8 @@ public class Engine {
       // (6) AI
       // (7) Audio
       // (8) Render
+      view.update();
       // (X) Possible Pause
-      paused = (EngineState.PAUSED == engineStateHolder.getState());
     }
   }
 

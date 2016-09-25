@@ -6,10 +6,12 @@ import static org.lwjgl.opengl.GL11.glClearColor;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.bvoid.engine.gfx.view.View;
 import org.bvoid.engine.gfx.window.Monitor;
-import org.bvoid.engine.gfx.window.DefaultMonitorService;
+import org.bvoid.engine.gfx.window.MonitorService;
 import org.bvoid.engine.gfx.window.Window;
 import org.bvoid.engine.gfx.window.WindowService;
+import org.bvoid.engine.input.InputService;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
@@ -20,9 +22,11 @@ public class DefaultInitializer implements Initializer {
   private WindowService windowService;
 
   @Inject
-  private DefaultMonitorService monitorService;
-
-  private Window mainWindow; // TODO store where?
+  private MonitorService monitorService;
+  @Inject
+  private InputService inputService;
+  @Inject
+  private View view;
 
   @Override
   public void init() {
@@ -32,24 +36,33 @@ public class DefaultInitializer implements Initializer {
       throw new IllegalStateException("Unable to initialize GLFW");
     }
 
-    this.mainWindow = windowService.createWindow(); // TODO
-    mainWindow.show();
+    setDefaultWindow();
 
-    final Monitor primaryMonitor = monitorService.getPrimaryMonitor();
-    mainWindow.centralize(primaryMonitor);
-
-    // ???? dummy loop
+    // TODO when does this have to be called exactly?
     GL.createCapabilities();
-    glClearColor((float) Math.random(), 0.0f, 0.0f, 0.0f);
 
+    glClearColor(1f, 0.0f, 0.0f, 0.0f);
     // TODO a test making use of System.gc(); ???
 
     // A common pattern is to use the close flag as a main loop condition.
-    while (!mainWindow.shouldClose()) {
-      // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-      // glClearColor((float) Math.random(), 0.0f, 0.0f, 0.0f);
-      mainWindow.update();
-    }
+    // while (!mainWindow.shouldClose()) {
+    // // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // // glClearColor((float) Math.random(), 0.0f, 0.0f, 0.0f);
+    // mainWindow.update();
+    // }
+
   }
 
+  protected void setDefaultWindow() {
+    view.setPrimaryWindow(initPrimaryWindow());
+  }
+
+  protected Window initPrimaryWindow() {
+    final Window window = windowService.createWindow();
+    window.show();
+    final Monitor primaryMonitor = monitorService.getPrimaryMonitor();
+    window.centralize(primaryMonitor);
+    inputService.bindInputCallbacks(window);
+    return window;
+  }
 }

@@ -4,7 +4,8 @@ import static org.lwjgl.glfw.GLFW.glfwDestroyWindow;
 import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
 import static org.lwjgl.glfw.GLFW.glfwHideWindow;
 import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
-import static org.lwjgl.glfw.GLFW.glfwPollEvents;
+import static org.lwjgl.glfw.GLFW.glfwSetCursorPosCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowIcon;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowPos;
 import static org.lwjgl.glfw.GLFW.glfwShowWindow;
@@ -15,7 +16,11 @@ import java.nio.IntBuffer;
 
 import org.joml.Vector2i;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWImage.Buffer;
+import org.lwjgl.glfw.GLFWKeyCallback;
+import org.lwjgl.glfw.GLFWMouseButtonCallback;
+import org.lwjgl.glfw.GLFWScrollCallback;
 
 public class Window {
 
@@ -63,7 +68,6 @@ public class Window {
 
   public void update() {
     glfwSwapBuffers(handle);
-    glfwPollEvents();
   }
 
   public boolean shouldClose() {
@@ -73,5 +77,23 @@ public class Window {
   public void destroy() {
     glfwDestroyWindow(handle);
   }
+
+  public void bindKeyCallback(GLFWKeyCallback keyCallback) {
+    glfwSetKeyCallback(handle, keyCallback);
+  }
+
+  public void bindCursorPosCallback(GLFWCursorPosCallback cursorPosCallback) {
+    glfwSetCursorPosCallback(handle, cursorPosCallback);
+  }
+
+  public void bindMouseButtonCallback(GLFWMouseButtonCallback mouseButtonCallback) {
+    org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback(handle, mouseButtonCallback);
+  }
+
+  public void bindScrollCallback(GLFWScrollCallback scrollCallback) {
+    org.lwjgl.glfw.GLFW.glfwSetScrollCallback(handle, scrollCallback);
+  }
+
+
 
 }

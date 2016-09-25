@@ -1,18 +1,20 @@
 package org.bvoid.engine.core;
 
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.bvoid.engine.core.close.Closer;
 import org.bvoid.engine.core.init.Initializer;
-import org.bvoid.engine.core.state.EngineState;
-import org.bvoid.engine.core.state.EngineStateHolder;
 import org.bvoid.engine.gfx.camera.CameraUpdateService;
+import org.bvoid.engine.gfx.view.View;
+import org.bvoid.engine.input.InputService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.verification.VerificationMode;
 
@@ -20,7 +22,6 @@ import org.mockito.verification.VerificationMode;
 public class EngineTest {
 
   private static final VerificationMode ONCE = times(1);
-  private static final VerificationMode TWICE = times(2);
 
   @InjectMocks
   private Engine classUnderTest;
@@ -31,29 +32,44 @@ public class EngineTest {
   @Mock
   private CameraUpdateService cameraUpdateSevice;
   @Mock
-  private EngineStateHolder engineStateHolder;
+  private InputService inputService;
+  @Mock
+  private View view;
+
+  private InOrder testOrder;
+
+  @Before
+  public void setUp() throws Exception {
+    testOrder = Mockito.inOrder(initializer, inputService, cameraUpdateSevice, view, closer);
+  }
 
   @Test
   public void testRunOnce() throws Exception {
-    when(engineStateHolder.getState()).thenReturn(EngineState.PAUSED);
+    when(view.shouldClose()).thenReturn(false).thenReturn(true);
 
     classUnderTest.run();
 
-    verify(initializer, ONCE).init();
-    verify(cameraUpdateSevice, ONCE).update();
-    verify(closer, ONCE).close();
+    testOrder.verify(initializer, ONCE).init();
+    testOrder.verify(inputService, ONCE).update();
+    testOrder.verify(cameraUpdateSevice, ONCE).update();
+    testOrder.verify(view, ONCE).update();
+    testOrder.verify(closer, ONCE).close();
   }
 
   @Test
   public void testRunTwice() throws Exception {
-    when(engineStateHolder.getState()).thenReturn(EngineState.RUNNING)
-        .thenReturn(EngineState.PAUSED);
+    when(view.shouldClose()).thenReturn(false).thenReturn(false).thenReturn(true);
 
     classUnderTest.run();
 
-    verify(initializer, ONCE).init();
-    verify(cameraUpdateSevice, TWICE).update();
-    verify(closer, ONCE).close();
+    testOrder.verify(initializer, ONCE).init();
+    testOrder.verify(inputService, ONCE).update();
+    testOrder.verify(cameraUpdateSevice, ONCE).update();
+    testOrder.verify(view, ONCE).update();
+    testOrder.verify(inputService, ONCE).update();
+    testOrder.verify(cameraUpdateSevice, ONCE).update();
+    testOrder.verify(view, ONCE).update();
+    testOrder.verify(closer, ONCE).close();
   }
 
 }
