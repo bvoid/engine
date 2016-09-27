@@ -7,20 +7,30 @@ import javax.inject.Named;
 import org.bvoid.engine.core.state.EngineState;
 import org.bvoid.engine.core.state.EngineStateHolder;
 import org.bvoid.engine.gfx.camera.CameraUpdateService;
-import org.bvoid.engine.window.WindowCloser;
-import org.bvoid.engine.window.WindowInitializer;
+import org.bvoid.engine.gfx.render.OpenglInitializer;
+import org.bvoid.engine.window.GlfwInitializer;
+import org.bvoid.engine.window.GlfwWindowCloser;
+import org.bvoid.engine.window.GlfwWindowInitializer;
 
 @Named
 public class Engine {
 
+  // TODO discuss init approach
   @Inject
-  private WindowInitializer windowInitializer;
-
+  private GlfwInitializer glfwInitializer;
   @Inject
-  private WindowCloser windowCloser;
+  private GlfwWindowInitializer glfwWindowInitializer;
+  @Inject
+  private OpenglInitializer openglInitializer;
 
+  // TODO discuss closer approach
+  @Inject
+  private GlfwWindowCloser windowCloser;
+
+  // TODO discuss update approach
   @Inject
   private CameraUpdateService cameraUpdateService;
+
   @Inject
   private EngineStateHolder engineStateHolder;
 
@@ -40,7 +50,9 @@ public class Engine {
   }
 
   private void init() {
-    windowInitializer.init();
+    glfwInitializer.init();
+    glfwWindowInitializer.init();
+    openglInitializer.init();
   }
 
   private void loop() {

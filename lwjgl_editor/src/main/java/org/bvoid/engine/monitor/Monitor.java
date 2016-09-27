@@ -1,11 +1,11 @@
 package org.bvoid.engine.monitor;
 
-import org.joml.Vector2i;
+import org.bvoid.engine.geometry.rectangle.Rectangle2D;
 
 public interface Monitor {
 
-  String getName();
+  public String getName();
 
-  Vector2i getSize();
+  public Rectangle2D getArea();
 
 }

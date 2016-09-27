@@ -16,8 +16,8 @@ public class GlfwMonitorTest {
   }
 
   // TODO @Test
-  public void testGetSize() throws Exception {
-    assertThat(classUnderTest.getSize()).isNull(); // TODO
+  public void testGetArea() throws Exception {
+    assertThat(classUnderTest.getArea()).isNull(); // TODO
   }
 
 }

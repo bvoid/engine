@@ -3,7 +3,8 @@ package org.bvoid.engine.monitor;
 import static org.lwjgl.glfw.GLFW.glfwGetMonitorName;
 import static org.lwjgl.glfw.GLFW.glfwGetVideoMode;
 
-import org.joml.Vector2i;
+import org.bvoid.engine.geometry.point.Point2D;
+import org.bvoid.engine.geometry.rectangle.Rectangle2D;
 import org.lwjgl.glfw.GLFWVidMode;
 
 public class GlfwMonitor implements Monitor {
@@ -20,13 +21,14 @@ public class GlfwMonitor implements Monitor {
   }
 
   @Override
-  public Vector2i getSize() {
-    final GLFWVidMode videoMode = glfwGetVideoMode(handle);
+  public Rectangle2D getArea() {
+    final Point2D position = new Point2D(0, 0);
 
+    final GLFWVidMode videoMode = glfwGetVideoMode(handle);
     final int width = videoMode.width();
     final int height = videoMode.height();
 
-    return new Vector2i(width, height);
+    return new Rectangle2D(position, width, height);
   }
 
 }

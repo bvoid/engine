@@ -5,7 +5,7 @@ import javax.inject.Named;
 import org.bvoid.engine.core.configuration.Closer;
 
 @Named
-public class WindowCloser implements Closer {
+public class GlfwWindowCloser implements Closer {
 
   @Override
   public void close() {
