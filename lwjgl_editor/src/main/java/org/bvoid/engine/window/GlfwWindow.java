@@ -18,7 +18,7 @@ import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 import java.nio.IntBuffer;
 
 import org.bvoid.engine.geometry.point.Point2D;
-import org.bvoid.engine.geometry.rectangle.Rectangle2D;
+import org.bvoid.engine.geometry.polygon.Rectangle2D;
 import org.bvoid.engine.monitor.Monitor;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWImage.Buffer;

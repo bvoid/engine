@@ -1,6 +1,6 @@
 package org.bvoid.engine.monitor;
 
-import org.bvoid.engine.geometry.rectangle.Rectangle2D;
+import org.bvoid.engine.geometry.polygon.Rectangle2D;
 
 public interface Monitor {
 

@@ -1,4 +1,4 @@
-package org.bvoid.engine.geometry.rectangle;
+package org.bvoid.engine.geometry.polygon;
 
 import org.bvoid.engine.geometry.point.Point2D;
 
@@ -8,6 +8,7 @@ public class Rectangle2D extends Rectangle<Point2D> {
     super(position, width, height);
   }
 
+  @Override
   public Point2D getCenter() {
     final float x = getPosition().getX() + (getWidth() / 2);
     final float y = getPosition().getY() + (getHeight() / 2);

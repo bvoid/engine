@@ -1,6 +1,7 @@
-package org.bvoid.engine.geometry.rectangle;
+package org.bvoid.engine.geometry.polygon;
 
 import org.bvoid.engine.geometry.point.Point;
+import org.bvoid.engine.geometry.point.Point2D;
 
 // TODO extend some kind of base interface for geometric objects
 public abstract class Rectangle<P extends Point> {
@@ -34,6 +35,11 @@ public abstract class Rectangle<P extends Point> {
 
   public float getHeight() {
     return height;
+  }
+
+  public Point2D getCenter() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }

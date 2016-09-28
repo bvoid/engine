@@ -4,7 +4,7 @@ import static org.lwjgl.glfw.GLFW.glfwGetMonitorName;
 import static org.lwjgl.glfw.GLFW.glfwGetVideoMode;
 
 import org.bvoid.engine.geometry.point.Point2D;
-import org.bvoid.engine.geometry.rectangle.Rectangle2D;
+import org.bvoid.engine.geometry.polygon.Rectangle2D;
 import org.lwjgl.glfw.GLFWVidMode;
 
 public class GlfwMonitor implements Monitor {
