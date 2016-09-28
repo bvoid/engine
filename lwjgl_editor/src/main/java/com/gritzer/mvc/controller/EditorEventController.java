@@ -8,7 +8,6 @@ import com.gritzer.mvc.model.PolygonBot;
 import com.gritzer.mvc.view.camera.Camera;
 import com.gritzer.mvc.view.canvas.PolygonBotInfoCanvas;
 import com.gritzer.mvc.view.event.EventController;
-import com.gritzer.mvc.view.event.Input;
 import com.gritzer.mvc.view.event.InputConstants;
 import com.gritzer.util.info.Info;
 

@@ -1,28 +1,25 @@
 package org.bvoid.engine.core;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.when;
 
-import org.bvoid.engine.core.state.EngineState;
-import org.bvoid.engine.core.state.EngineStateHolder;
 import org.bvoid.engine.gfx.camera.CameraUpdateService;
 import org.bvoid.engine.gfx.render.OpenglInitializer;
+import org.bvoid.engine.gfx.view.View;
+import org.bvoid.engine.input.InputService;
 import org.bvoid.engine.window.GlfwInitializer;
 import org.bvoid.engine.window.GlfwWindowCloser;
 import org.bvoid.engine.window.GlfwWindowInitializer;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.verification.VerificationMode;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EngineTest {
-
-  private static final VerificationMode ONCE = times(1);
-  private static final VerificationMode TWICE = times(2);
 
   @InjectMocks
   private Engine classUnderTest;
@@ -40,37 +37,71 @@ public class EngineTest {
   @Mock
   private CameraUpdateService cameraUpdateSevice;
   @Mock
-  private EngineStateHolder engineStateHolder;
+  private InputService inputService;
+  @Mock
+  private View view;
+
+  private InOrder inOrder;
+
+  @Before
+  public void setUp() throws Exception {
+    inOrder = inOrder(glfwInitializer, glfwWindowInitializer, openglInitializer, inputService,
+        cameraUpdateSevice, view, windowCloser);
+  }
 
   @Test
   public void testRunOnce() throws Exception {
-    when(engineStateHolder.getState()).thenReturn(EngineState.PAUSED);
+    when(view.shouldClose()).thenReturn(false).thenReturn(true);
 
     classUnderTest.run();
 
-    verify(glfwInitializer, ONCE).init();
-    verify(glfwWindowInitializer, ONCE).init();
-    verify(openglInitializer, ONCE).init();
+    /**
+     * INIT PHASE
+     */
+    inOrder.verify(glfwInitializer).init();
+    inOrder.verify(glfwWindowInitializer).init();
+    inOrder.verify(openglInitializer).init();
 
-    verify(cameraUpdateSevice, ONCE).update();
+    /**
+     * UPDATE PHASE
+     */
+    inOrder.verify(inputService).update();
+    inOrder.verify(cameraUpdateSevice).update();
+    inOrder.verify(view).update();
 
-    verify(windowCloser, ONCE).close();
+    /**
+     * CLOSING PHASE
+     */
+    inOrder.verify(windowCloser).close();
   }
 
   @Test
   public void testRunTwice() throws Exception {
-    when(engineStateHolder.getState()).thenReturn(EngineState.RUNNING)
-        .thenReturn(EngineState.PAUSED);
+    when(view.shouldClose()).thenReturn(false).thenReturn(false).thenReturn(true);
 
     classUnderTest.run();
 
-    verify(glfwInitializer, ONCE).init();
-    verify(glfwWindowInitializer, ONCE).init();
-    verify(openglInitializer, ONCE).init();
+    /**
+     * INIT PHASE
+     */
+    inOrder.verify(glfwInitializer).init();
+    inOrder.verify(glfwWindowInitializer).init();
+    inOrder.verify(openglInitializer).init();
 
-    verify(cameraUpdateSevice, TWICE).update();
+    /**
+     * UPDATE PHASE
+     */
+    inOrder.verify(inputService).update();
+    inOrder.verify(cameraUpdateSevice).update();
+    inOrder.verify(view).update();
+    inOrder.verify(inputService).update();
+    inOrder.verify(cameraUpdateSevice).update();
+    inOrder.verify(view).update();
 
-    verify(windowCloser, ONCE).close();
+    /**
+     * CLOSING PHASE
+     */
+    inOrder.verify(windowCloser).close();
   }
 
 }

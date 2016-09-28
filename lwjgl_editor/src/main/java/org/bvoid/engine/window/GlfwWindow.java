@@ -7,17 +7,24 @@ import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
 import static org.lwjgl.glfw.GLFW.glfwHideWindow;
 import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
+import static org.lwjgl.glfw.GLFW.glfwSetCursorPosCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowIcon;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowPos;
 import static org.lwjgl.glfw.GLFW.glfwShowWindow;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
+import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 import java.nio.IntBuffer;
 
 import org.bvoid.engine.geometry.point.Point2D;
 import org.bvoid.engine.geometry.rectangle.Rectangle2D;
 import org.bvoid.engine.monitor.Monitor;
+import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWImage.Buffer;
+import org.lwjgl.glfw.GLFWKeyCallback;
+import org.lwjgl.glfw.GLFWMouseButtonCallback;
+import org.lwjgl.glfw.GLFWScrollCallback;
 
 public class GlfwWindow implements Window {
 
@@ -104,6 +111,32 @@ public class GlfwWindow implements Window {
   @Override
   public void destroy() {
     glfwDestroyWindow(handle);
+  }
+
+  // TODO workaround / implicit
+  @Override
+  public boolean shouldClose() {
+    return glfwWindowShouldClose(handle);
+  }
+
+  @Override
+  public void bindKeyCallback(final GLFWKeyCallback keyCallback) {
+    glfwSetKeyCallback(handle, keyCallback);
+  }
+
+  @Override
+  public void bindCursorPosCallback(final GLFWCursorPosCallback cursorPosCallback) {
+    glfwSetCursorPosCallback(handle, cursorPosCallback);
+  }
+
+  @Override
+  public void bindMouseButtonCallback(final GLFWMouseButtonCallback mouseButtonCallback) {
+    org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback(handle, mouseButtonCallback);
+  }
+
+  @Override
+  public void bindScrollCallback(final GLFWScrollCallback scrollCallback) {
+    org.lwjgl.glfw.GLFW.glfwSetScrollCallback(handle, scrollCallback);
   }
 
 }

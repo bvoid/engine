@@ -9,7 +9,10 @@ public class Rectangle2D extends Rectangle<Point2D> {
   }
 
   public Point2D getCenter() {
-    return null;
+    final float x = getPosition().getX() + (getWidth() / 2);
+    final float y = getPosition().getY() + (getHeight() / 2);
+
+    return new Point2D(x, y);
   }
 
 }
