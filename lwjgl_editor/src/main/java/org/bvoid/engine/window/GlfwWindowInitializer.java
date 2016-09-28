@@ -4,15 +4,17 @@ import static org.bvoid.engine.window.WindowConstants.DEFAULT_SIZE;
 import static org.bvoid.engine.window.WindowConstants.DEFAULT_TITLE;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.bvoid.engine.core.configuration.Initializer;
 import org.bvoid.engine.gfx.view.View;
 import org.bvoid.engine.input.InputService;
 import org.bvoid.engine.monitor.GlfwMonitorProvider;
 import org.bvoid.engine.monitor.Monitor;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
-@Named
+@Component
+@Order(2)
 public class GlfwWindowInitializer implements Initializer {
 
   @Inject

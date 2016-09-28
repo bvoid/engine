@@ -1,27 +1,22 @@
 package org.bvoid.engine.core;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.bvoid.engine.core.configuration.Initializer;
 import org.bvoid.engine.gfx.camera.CameraUpdateService;
-import org.bvoid.engine.gfx.render.OpenglInitializer;
 import org.bvoid.engine.gfx.view.View;
 import org.bvoid.engine.input.InputService;
-import org.bvoid.engine.window.GlfwInitializer;
 import org.bvoid.engine.window.GlfwWindowCloser;
-import org.bvoid.engine.window.GlfwWindowInitializer;
 
 @Named
 public class Engine {
 
-  // TODO discuss init approach
   @Inject
-  private GlfwInitializer glfwInitializer;
-  @Inject
-  private GlfwWindowInitializer glfwWindowInitializer;
-  @Inject
-  private OpenglInitializer openglInitializer;
+  private List<Initializer> initializers;
 
   // TODO discuss closer approach
   @Inject
@@ -49,9 +44,7 @@ public class Engine {
   }
 
   private void init() {
-    glfwInitializer.init();
-    glfwWindowInitializer.init();
-    openglInitializer.init();
+    initializers.forEach(Initializer::init);
   }
 
   private void loop() {
