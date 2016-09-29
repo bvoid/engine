@@ -3,13 +3,13 @@ package org.bvoid.engine.core;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
+
+import org.bvoid.engine.core.configuration.Initializer;
 import org.bvoid.engine.gfx.camera.CameraUpdateService;
-import org.bvoid.engine.gfx.render.OpenglInitializer;
 import org.bvoid.engine.gfx.view.View;
 import org.bvoid.engine.input.InputService;
-import org.bvoid.engine.window.GlfwInitializer;
 import org.bvoid.engine.window.GlfwWindowCloser;
-import org.bvoid.engine.window.GlfwWindowInitializer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,17 +23,10 @@ public class EngineTest {
 
   @InjectMocks
   private Engine classUnderTest;
-
   @Mock
-  private GlfwInitializer glfwInitializer;
-  @Mock
-  private GlfwWindowInitializer glfwWindowInitializer;
-  @Mock
-  private OpenglInitializer openglInitializer;
-
+  private List<Initializer> initializers;
   @Mock
   private GlfwWindowCloser windowCloser;
-
   @Mock
   private CameraUpdateService cameraUpdateSevice;
   @Mock
@@ -45,8 +38,7 @@ public class EngineTest {
 
   @Before
   public void setUp() throws Exception {
-    inOrder = inOrder(glfwInitializer, glfwWindowInitializer, openglInitializer, inputService,
-        cameraUpdateSevice, view, windowCloser);
+    inOrder = inOrder(inputService, cameraUpdateSevice, view, windowCloser);
   }
 
   @Test
@@ -54,13 +46,6 @@ public class EngineTest {
     when(view.shouldClose()).thenReturn(false).thenReturn(true);
 
     classUnderTest.run();
-
-    /**
-     * INIT PHASE
-     */
-    inOrder.verify(glfwInitializer).init();
-    inOrder.verify(glfwWindowInitializer).init();
-    inOrder.verify(openglInitializer).init();
 
     /**
      * UPDATE PHASE
@@ -80,13 +65,6 @@ public class EngineTest {
     when(view.shouldClose()).thenReturn(false).thenReturn(false).thenReturn(true);
 
     classUnderTest.run();
-
-    /**
-     * INIT PHASE
-     */
-    inOrder.verify(glfwInitializer).init();
-    inOrder.verify(glfwWindowInitializer).init();
-    inOrder.verify(openglInitializer).init();
 
     /**
      * UPDATE PHASE
