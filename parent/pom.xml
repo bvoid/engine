@@ -17,7 +17,7 @@
 
     <!-- DEPENDENCIES -->
     <lwjgl.version>3.0.0</lwjgl.version>
-    <joml.version>1.8.3</joml.version>
+    <joml.version>1.8.4</joml.version>
     <spring.version>4.3.2.RELEASE</spring.version>
     <log4j.version>1.2.17</log4j.version>
     <junit.version>4.12</junit.version>
