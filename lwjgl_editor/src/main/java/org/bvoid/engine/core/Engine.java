@@ -1,6 +1,7 @@
 package org.bvoid.engine.core;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -15,8 +16,9 @@ import org.bvoid.engine.window.GlfwWindowCloser;
 @Named
 public class Engine {
 
+
   @Inject
-  private List<Initializer> initializers;
+  private Supplier<List<Initializer>> initializerSupplier;
 
   // TODO discuss closer approach
   @Inject
@@ -44,7 +46,7 @@ public class Engine {
   }
 
   private void init() {
-    initializers.forEach(Initializer::init);
+    initializerSupplier.get().forEach(Initializer::init);
   }
 
   private void loop() {

@@ -4,7 +4,9 @@ import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.function.Supplier;
 
+import org.assertj.core.util.Lists;
 import org.bvoid.engine.core.configuration.Initializer;
 import org.bvoid.engine.gfx.camera.CameraUpdateService;
 import org.bvoid.engine.gfx.view.View;
@@ -16,6 +18,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -24,7 +27,7 @@ public class EngineTest {
   @InjectMocks
   private Engine classUnderTest;
   @Mock
-  private List<Initializer> initializers;
+  private Supplier<List<Initializer>> initializerSupplier;
   @Mock
   private GlfwWindowCloser windowCloser;
   @Mock
@@ -34,11 +37,20 @@ public class EngineTest {
   @Mock
   private View view;
 
+  private List<Initializer> initializers;
+  private Initializer initMock1;
+  private Initializer initMock2;
+
   private InOrder inOrder;
 
   @Before
   public void setUp() throws Exception {
-    inOrder = inOrder(inputService, cameraUpdateSevice, view, windowCloser);
+    initMock1 = Mockito.mock(Initializer.class);
+    initMock2 = Mockito.mock(Initializer.class);
+    initializers = Lists.newArrayList(initMock1, initMock2);
+    when(initializerSupplier.get()).thenReturn(initializers);
+
+    inOrder = inOrder(initMock2, initMock1, inputService, cameraUpdateSevice, view, windowCloser);
   }
 
   @Test
@@ -46,6 +58,12 @@ public class EngineTest {
     when(view.shouldClose()).thenReturn(false).thenReturn(true);
 
     classUnderTest.run();
+
+    /**
+     * INIT PHASE
+     */
+    inOrder.verify(initMock1).init();
+    inOrder.verify(initMock2).init();
 
     /**
      * UPDATE PHASE
@@ -65,6 +83,12 @@ public class EngineTest {
     when(view.shouldClose()).thenReturn(false).thenReturn(false).thenReturn(true);
 
     classUnderTest.run();
+
+    /**
+     * INIT PHASE
+     */
+    inOrder.verify(initMock1).init();
+    inOrder.verify(initMock2).init();
 
     /**
      * UPDATE PHASE
