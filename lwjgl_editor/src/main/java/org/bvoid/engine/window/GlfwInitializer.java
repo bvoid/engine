@@ -6,11 +6,9 @@ import javax.inject.Named;
 
 import org.bvoid.engine.core.configuration.Initializer;
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
-@Component
-@Order(1)
+
+@Named
 public class GlfwInitializer implements Initializer {
 
   @Override
@@ -20,6 +18,11 @@ public class GlfwInitializer implements Initializer {
     if (!glfwInit()) { // TODO move
       throw new IllegalStateException("Unable to initialize GLFW");
     }
+  }
+
+  @Override
+  public int getOrdinal() {
+    return 1;
   }
 
 }
