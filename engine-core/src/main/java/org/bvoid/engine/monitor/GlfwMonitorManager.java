@@ -4,14 +4,14 @@ import static org.lwjgl.glfw.GLFW.glfwGetMonitors;
 import static org.lwjgl.glfw.GLFW.glfwGetPrimaryMonitor;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import javax.inject.Named;
 
 import org.lwjgl.PointerBuffer;
 
 @Named
-public class GlfwMonitorProvider implements MonitorProvider {
+public class GlfwMonitorManager implements MonitorManager {
 
   @Override
   public Monitor getPrimaryMonitor() {
@@ -20,12 +20,12 @@ public class GlfwMonitorProvider implements MonitorProvider {
   }
 
   @Override
-  public Collection<Monitor> getMonitors() {
-    final Collection<Monitor> monitors = new ArrayList<>();
+  public List<Monitor> getMonitors() {
+    final List<Monitor> monitors = new ArrayList<>();
 
     final PointerBuffer handles = glfwGetMonitors();
     if (handles == null) {
-      return null; // TODO see test
+      return null;
     }
 
     while (handles.hasRemaining()) {

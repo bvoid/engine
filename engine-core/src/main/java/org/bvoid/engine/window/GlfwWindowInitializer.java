@@ -9,7 +9,7 @@ import javax.inject.Named;
 import org.bvoid.engine.core.configuration.Initializer;
 import org.bvoid.engine.gfx.view.View;
 import org.bvoid.engine.input.InputService;
-import org.bvoid.engine.monitor.GlfwMonitorProvider;
+import org.bvoid.engine.monitor.GlfwMonitorManager;
 import org.bvoid.engine.monitor.Monitor;
 
 @Named
@@ -20,7 +20,7 @@ public class GlfwWindowInitializer implements Initializer {
   @Inject
   private GlfwWindowFactory windowService;
   @Inject
-  private GlfwMonitorProvider monitorService;
+  private GlfwMonitorManager monitorService;
   @Inject
   private InputService inputService;
   @Inject

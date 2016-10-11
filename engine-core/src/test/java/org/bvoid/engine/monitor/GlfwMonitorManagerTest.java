@@ -5,10 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 
-public class GlfwMonitorProviderTest {
+public class GlfwMonitorManagerTest {
 
   @InjectMocks
-  private MonitorProvider classUnderTest = new GlfwMonitorProvider();
+  private MonitorManager classUnderTest = new GlfwMonitorManager();
 
   @Test
   public void testGetPrimaryMonitor() throws Exception {
