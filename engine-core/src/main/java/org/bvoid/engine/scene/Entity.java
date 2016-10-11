@@ -11,6 +11,7 @@ public class Entity implements Serializable {
   private final List<Entity> entities = new ArrayList<>(); // TODO discuss final & init
 
   private String name;
+  private String type;
   private Transform transform;
 
   public Entity() {}
@@ -21,6 +22,14 @@ public class Entity implements Serializable {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
   public Transform getTransform() {
@@ -42,6 +51,7 @@ public class Entity implements Serializable {
     result = prime * result + ((entities == null) ? 0 : entities.hashCode());
     result = prime * result + ((name == null) ? 0 : name.hashCode());
     result = prime * result + ((transform == null) ? 0 : transform.hashCode());
+    result = prime * result + ((type == null) ? 0 : type.hashCode());
     return result;
   }
 
@@ -68,6 +78,11 @@ public class Entity implements Serializable {
       if (other.transform != null)
         return false;
     } else if (!transform.equals(other.transform))
+      return false;
+    if (type == null) {
+      if (other.type != null)
+        return false;
+    } else if (!type.equals(other.type))
       return false;
     return true;
   }
