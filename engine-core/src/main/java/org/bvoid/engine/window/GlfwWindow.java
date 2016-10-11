@@ -17,9 +17,8 @@ import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 import java.nio.IntBuffer;
 
-import org.bvoid.engine.geometry.point.Point2D;
-import org.bvoid.engine.geometry.polygon.Rectangle2D;
 import org.bvoid.engine.monitor.Monitor;
+import org.bvoid.engine.monitor.Resolution;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWImage.Buffer;
 import org.lwjgl.glfw.GLFWKeyCallback;
@@ -30,23 +29,8 @@ public class GlfwWindow implements Window {
 
   private final long handle;
 
-  public GlfwWindow(final long handle) {
+  public GlfwWindow(long handle) {
     this.handle = handle;
-  }
-
-  @Override
-  public Rectangle2D getArea() {
-    final Point2D position = getPosition();
-
-    final IntBuffer widthBuffer = createIntBuffer(1);
-    final IntBuffer heightBuffer = createIntBuffer(1);
-
-    glfwGetWindowSize(handle, widthBuffer, heightBuffer);
-
-    final float width = widthBuffer.get(0);
-    final float height = heightBuffer.get(0);
-
-    return new Rectangle2D(position, width, height);
   }
 
   @Override
@@ -62,38 +46,58 @@ public class GlfwWindow implements Window {
   }
 
   @Override
-  public void centralize(final Monitor targetMonitor) {
-    final Rectangle2D screenArea = targetMonitor.getArea();
-    final Point2D screenCenter = screenArea.getCenter();
+  public void centralize(Monitor monitor) {
+    final Resolution resolution = monitor.getResolution();
 
-    final float screenCenterX = screenCenter.getX();
-    final float screenCenterY = screenCenter.getY();
+    final int x = (resolution.getWidth() / 2) - (getWidth() / 2);
+    final int y = (resolution.getHeight() / 2) - (getHeight() / 2);
 
-    final float x = screenCenterX - (getArea().getWidth() / 2);
-    final float y = screenCenterY - (getArea().getHeight() / 2);
-
-    setPosition(new Point2D(x, y));
+    setPosition(x, y);
   }
 
   @Override
-  public void setPosition(final Point2D point) {
-    final int x = (int) point.getX();
-    final int y = (int) point.getY();
-
+  public void setPosition(int x, int y) {
     glfwSetWindowPos(handle, x, y);
   }
 
   @Override
-  public Point2D getPosition() {
+  public int getX() {
     final IntBuffer xBuffer = createIntBuffer(1);
     final IntBuffer yBuffer = createIntBuffer(1);
 
     glfwGetWindowPos(handle, xBuffer, yBuffer);
 
-    final float x = xBuffer.get(0);
-    final float y = yBuffer.get(0);
+    return xBuffer.get(0);
+  }
 
-    return new Point2D(x, y);
+  @Override
+  public int getY() {
+    final IntBuffer xBuffer = createIntBuffer(1);
+    final IntBuffer yBuffer = createIntBuffer(1);
+
+    glfwGetWindowPos(handle, xBuffer, yBuffer);
+
+    return yBuffer.get(0);
+  }
+
+  @Override
+  public int getWidth() {
+    final IntBuffer widthBuffer = createIntBuffer(1);
+    final IntBuffer heightBuffer = createIntBuffer(1);
+
+    glfwGetWindowSize(handle, widthBuffer, heightBuffer);
+
+    return widthBuffer.get(0);
+  }
+
+  @Override
+  public int getHeight() {
+    final IntBuffer widthBuffer = createIntBuffer(1);
+    final IntBuffer heightBuffer = createIntBuffer(1);
+
+    glfwGetWindowSize(handle, widthBuffer, heightBuffer);
+
+    return heightBuffer.get(0);
   }
 
   @Override
@@ -120,22 +124,22 @@ public class GlfwWindow implements Window {
   }
 
   @Override
-  public void bindKeyCallback(final GLFWKeyCallback keyCallback) {
+  public void bindKeyCallback(GLFWKeyCallback keyCallback) {
     glfwSetKeyCallback(handle, keyCallback);
   }
 
   @Override
-  public void bindCursorPosCallback(final GLFWCursorPosCallback cursorPosCallback) {
+  public void bindCursorPosCallback(GLFWCursorPosCallback cursorPosCallback) {
     glfwSetCursorPosCallback(handle, cursorPosCallback);
   }
 
   @Override
-  public void bindMouseButtonCallback(final GLFWMouseButtonCallback mouseButtonCallback) {
+  public void bindMouseButtonCallback(GLFWMouseButtonCallback mouseButtonCallback) {
     org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback(handle, mouseButtonCallback);
   }
 
   @Override
-  public void bindScrollCallback(final GLFWScrollCallback scrollCallback) {
+  public void bindScrollCallback(GLFWScrollCallback scrollCallback) {
     org.lwjgl.glfw.GLFW.glfwSetScrollCallback(handle, scrollCallback);
   }
 

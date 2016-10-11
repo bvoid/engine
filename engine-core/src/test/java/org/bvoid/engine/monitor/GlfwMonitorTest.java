@@ -16,8 +16,8 @@ public class GlfwMonitorTest {
   }
 
   // TODO @Test
-  public void testGetArea() throws Exception {
-    assertThat(classUnderTest.getArea()).isNull(); // TODO
-  }
+    public void testGetResolution() throws Exception {
+      assertThat(classUnderTest.getResolution()).isNull(); // TODO
+    }
 
 }

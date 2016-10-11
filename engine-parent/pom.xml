@@ -19,6 +19,7 @@
     <lwjgl.version>3.0.0</lwjgl.version>
     <joml.version>1.8.4</joml.version>
     <spring.version>4.3.3.RELEASE</spring.version>
+    <commons-lang.version>3.4</commons-lang.version>
     <log4j.version>1.2.17</log4j.version>
     <junit.version>4.12</junit.version>
     <mockito.version>1.10.19</mockito.version>
@@ -27,7 +28,7 @@
   </properties>
 
   <dependencyManagement>
-    <dependencies>      
+    <dependencies>
       <dependency>
         <groupId>org.bvoid.engine</groupId>
         <artifactId>engine-core</artifactId>
@@ -65,6 +66,11 @@
         <groupId>org.springframework</groupId>
         <artifactId>spring-context</artifactId>
         <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang.version}</version>
       </dependency>
       <dependency>
         <groupId>javax.inject</groupId>
