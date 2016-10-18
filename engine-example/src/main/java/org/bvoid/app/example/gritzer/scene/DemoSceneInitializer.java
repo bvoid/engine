@@ -4,9 +4,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bvoid.app.example.gritzer.view.canvas.DemoCanvas;
+import org.bvoid.engine.scene.BasicEntity;
 import org.bvoid.engine.scene.Scene;
 import org.bvoid.engine.scene.SceneManager;
-import org.bvoid.engine.scene.camera.Camera;
 import org.springframework.context.annotation.Primary;
 
 
@@ -27,7 +27,7 @@ public class DemoSceneInitializer extends SceneInitializer {
 
   private Scene initScene() {
     final Scene demoScene = new Scene();
-    demoCanvas.setCamera(new Camera());
+    demoCanvas.setCamera(new BasicEntity());
     return demoScene;
   }
 

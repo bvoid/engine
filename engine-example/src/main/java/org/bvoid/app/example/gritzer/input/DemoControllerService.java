@@ -24,8 +24,9 @@ public class DemoControllerService implements ControllerService {
   @Override
   public Controller find(Point2D point) {
     final Controller controller =
-        controllers.stream().filter(c -> c.getCanvas().getBounds().contains(point)).findFirst()
-            .orElse(null);
+        controllers.stream()
+            .filter(c -> c.getCanvas() != null && c.getCanvas().getBounds().contains(point))
+            .findFirst().orElse(null);
 
     if (controller != null) {
       activeController = controller;

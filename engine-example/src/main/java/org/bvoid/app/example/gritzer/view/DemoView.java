@@ -16,7 +16,6 @@ public class DemoView extends DefaultView {
   @Inject
   private DemoCanvas demoCanvas;
 
-
   @Override
   public void update() {
     demoCanvas.setBounds(new Rectangle2D(new Point2D(primaryWindow.getX(), primaryWindow.getY()),

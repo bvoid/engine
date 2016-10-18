@@ -12,13 +12,14 @@ import org.bvoid.app.example.gritzer.view.canvas.DemoCanvas;
 
 @Named
 public class DemoCanvasController implements Controller {
+
   @Inject
   private DemoCanvas demoCanvas;
   private List<Point2D> pointsToDraw = new ArrayList<>();
 
   @Override
   public void mouseDragged(Point2D mousePosition) {
-    pointsToDraw.add(mousePosition);
+    System.out.println("dragged");
   }
 
   @Override

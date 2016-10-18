@@ -4,13 +4,13 @@ package org.bvoid.app.example.gritzer.view.canvas;
 import javax.inject.Named;
 
 import org.bvoid.app.example.gritzer.geom.Rectangle2D;
-import org.bvoid.engine.scene.camera.Camera;
+import org.bvoid.engine.scene.Entity;
 
 @Named
 public class DemoCanvas implements Canvas {
 
   private Rectangle2D bounds;
-  private Camera camera;
+  private Entity camera;
 
   public DemoCanvas() {
     super();
@@ -25,11 +25,11 @@ public class DemoCanvas implements Canvas {
     this.bounds = bounds;
   }
 
-  public void setCamera(Camera camera) {
+  public void setCamera(Entity camera) {
     this.camera = camera;
   }
 
-  public Camera getCamera() {
+  public Entity getCamera() {
     return camera;
   }
 
