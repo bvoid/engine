@@ -9,7 +9,6 @@ import java.util.function.Supplier;
 import org.assertj.core.util.Lists;
 import org.bvoid.engine.core.configuration.Initializer;
 import org.bvoid.engine.input.InputService;
-import org.bvoid.engine.scene.camera.CameraUpdateService;
 import org.bvoid.engine.view.View;
 import org.bvoid.engine.window.GlfwWindowCloser;
 import org.junit.Before;
@@ -31,8 +30,6 @@ public class EngineTest {
   @Mock
   private GlfwWindowCloser windowCloser;
   @Mock
-  private CameraUpdateService cameraUpdateSevice;
-  @Mock
   private InputService inputService;
   @Mock
   private View view;
@@ -50,7 +47,7 @@ public class EngineTest {
     initializers = Lists.newArrayList(initMock1, initMock2);
     when(initializerSupplier.get()).thenReturn(initializers);
 
-    inOrder = inOrder(initMock2, initMock1, inputService, cameraUpdateSevice, view, windowCloser);
+    inOrder = inOrder(initMock2, initMock1, inputService, view, windowCloser);
   }
 
   @Test
@@ -69,7 +66,6 @@ public class EngineTest {
      * UPDATE PHASE
      */
     inOrder.verify(inputService).update();
-    inOrder.verify(cameraUpdateSevice).update();
     inOrder.verify(view).update();
 
     /**
@@ -94,10 +90,8 @@ public class EngineTest {
      * UPDATE PHASE
      */
     inOrder.verify(inputService).update();
-    inOrder.verify(cameraUpdateSevice).update();
     inOrder.verify(view).update();
     inOrder.verify(inputService).update();
-    inOrder.verify(cameraUpdateSevice).update();
     inOrder.verify(view).update();
 
     /**
