@@ -19,7 +19,7 @@ public class DemoView extends DefaultView {
   @Override
   public void update() {
     demoCanvas.setBounds(new Rectangle2D(new Point2D(primaryWindow.getX(), primaryWindow.getY()),
-        primaryWindow.getWidth(), primaryWindow.getHeight()));
+        100, 100));
     super.update();
   }
 }

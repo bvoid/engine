@@ -19,7 +19,9 @@ public class DemoCanvasController implements Controller {
 
   @Override
   public void mouseDragged(Point2D mousePosition) {
-    System.out.println("dragged");
+    if (demoCanvas.getBounds().contains(mousePosition)) {
+      System.out.println("dragged");
+    }
   }
 
   @Override
