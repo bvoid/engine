@@ -4,7 +4,7 @@ package org.bvoid.app.example.gritzer.view.canvas;
 import javax.inject.Named;
 
 import org.bvoid.app.example.gritzer.geom.Rectangle2D;
-import org.bvoid.engine.scene.Camera;
+import org.bvoid.engine.scene.camera.Camera;
 
 @Named
 public class DemoCanvas implements Canvas {

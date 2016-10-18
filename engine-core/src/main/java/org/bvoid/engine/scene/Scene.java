@@ -9,7 +9,7 @@ public class Scene implements Serializable {
 
   private static final long serialVersionUID = 0xA000000000000001L;
 
-  private final List<BasicEntity> entities = new ArrayList<>();
+  private final List<Entity> entities = new ArrayList<>();
 
   private String name;
 
@@ -23,7 +23,7 @@ public class Scene implements Serializable {
     this.name = name;
   }
 
-  public List<BasicEntity> getEntities() {
+  public List<Entity> getEntities() {
     return entities;
   }
 

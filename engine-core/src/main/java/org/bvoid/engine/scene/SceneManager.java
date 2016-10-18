@@ -1,5 +1,8 @@
 package org.bvoid.engine.scene;
 
+import javax.inject.Named;
+
+@Named
 public class SceneManager {
 
   private Scene scene;
