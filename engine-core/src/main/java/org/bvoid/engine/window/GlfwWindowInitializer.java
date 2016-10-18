@@ -7,10 +7,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bvoid.engine.core.configuration.Initializer;
-import org.bvoid.engine.gfx.view.View;
 import org.bvoid.engine.input.InputService;
 import org.bvoid.engine.monitor.GlfwMonitorManager;
 import org.bvoid.engine.monitor.Monitor;
+import org.bvoid.engine.view.View;
 
 @Named
 public class GlfwWindowInitializer implements Initializer {

@@ -8,9 +8,9 @@ import java.util.function.Supplier;
 
 import org.assertj.core.util.Lists;
 import org.bvoid.engine.core.configuration.Initializer;
-import org.bvoid.engine.gfx.camera.CameraUpdateService;
-import org.bvoid.engine.gfx.view.View;
 import org.bvoid.engine.input.InputService;
+import org.bvoid.engine.scene.camera.CameraUpdateService;
+import org.bvoid.engine.view.View;
 import org.bvoid.engine.window.GlfwWindowCloser;
 import org.junit.Before;
 import org.junit.Test;

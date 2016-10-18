@@ -1,4 +1,4 @@
-package org.bvoid.engine.gfx.render;
+package org.bvoid.engine.render;
 
 import static org.lwjgl.opengl.GL.createCapabilities;
 import static org.lwjgl.opengl.GL11.glClearColor;

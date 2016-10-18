@@ -1,4 +1,4 @@
-package org.bvoid.engine.gfx.view;
+package org.bvoid.engine.view;
 
 import javax.inject.Named;
 

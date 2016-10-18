@@ -1,4 +1,4 @@
-package org.bvoid.engine.gfx.camera;
+package org.bvoid.engine.scene.camera;
 
 import javax.inject.Named;
 

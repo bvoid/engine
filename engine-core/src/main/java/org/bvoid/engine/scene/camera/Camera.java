@@ -1,6 +1,6 @@
-package org.bvoid.engine.scene;
+package org.bvoid.engine.scene.camera;
 
-public class Camera extends BasicEntity {
+
 
   private static final long serialVersionUID = 0xA000000000000001L;
 
