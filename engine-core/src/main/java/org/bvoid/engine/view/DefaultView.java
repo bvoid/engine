@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 @Named
 public class DefaultView implements View {
 
-  private Window primaryWindow;
+  protected Window primaryWindow;
 
   @Override
   public void setPrimaryWindow(final Window window) {
