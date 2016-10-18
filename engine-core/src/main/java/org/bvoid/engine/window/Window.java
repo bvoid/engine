@@ -38,6 +38,6 @@ public interface Window {
 
   public void bindMouseButtonCallback(GLFWMouseButtonCallback mouseButtonCallback);
 
-  public void bindScrollCallback(final GLFWScrollCallback scrollCallback);
+  public void bindScrollCallback(GLFWScrollCallback scrollCallback);
 
 }

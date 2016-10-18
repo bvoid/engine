@@ -8,6 +8,8 @@ public interface View {
 
   public boolean shouldClose();
 
-  public void setPrimaryWindow(final Window initPrimaryWindow);
+  public Window getPrimaryWindow();
+
+  public void setPrimaryWindow(Window initPrimaryWindow);
 
 }
