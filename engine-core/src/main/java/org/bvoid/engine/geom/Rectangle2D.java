@@ -1,7 +1,9 @@
-package org.bvoid.app.example.gritzer.geom;
+package org.bvoid.engine.geom;
+
+import org.bvoid.engine.util.Polygon;
 
 
-public class Rectangle2D {
+public class Rectangle2D implements Polygon {
 
   private Point2D position;
   private float w, h;
@@ -40,5 +42,17 @@ public class Rectangle2D {
 
   public void setH(float h) {
     this.h = h;
+  }
+
+
+  @Override
+  public float[] getXPoints() {
+    return new float[] {position.getX(), position.getX() + w, position.getX() + w, position.getX()};
+  }
+
+
+  @Override
+  public float[] getYPoints() {
+    return new float[] {position.getY(), position.getY(), position.getY() + h, position.getY() + h};
   }
 }

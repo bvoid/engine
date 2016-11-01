@@ -1,4 +1,4 @@
-package org.bvoid.app.example.gritzer.geom;
+package org.bvoid.engine.geom;
 
 public class Point2D {
   private float x, y;
@@ -6,6 +6,10 @@ public class Point2D {
   public Point2D(float xpos, float ypos) {
     x = xpos;
     y = ypos;
+  }
+
+  public Point2D() {
+    this(0f, 0f);
   }
 
   public float getX() {

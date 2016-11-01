@@ -5,12 +5,14 @@ import java.util.List;
 
 public interface Entity extends Serializable {
 
-  public String getName();
+  String getName();
 
-  public String getType();
+  String getType();
 
-  public Transform getTransform();
+  Transform getTransform();
 
-  public List<BasicEntity> getEntities();
+  Shape getShape();
+
+  List<Entity> getEntities();
 
 }

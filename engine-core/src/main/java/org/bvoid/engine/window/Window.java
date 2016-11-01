@@ -8,36 +8,37 @@ import org.lwjgl.glfw.GLFWScrollCallback;
 
 public interface Window {
 
-  public void show();
+  void show();
 
-  public void hide();
+  void hide();
 
-  public void centralize(Monitor targetMonitor);
+  void centralize(Monitor targetMonitor);
 
-  public void setPosition(int x, int y);
+  void setPosition(int x, int y);
 
-  public int getX();
+  int getX();
 
-  public int getY();
+  int getY();
 
-  public int getWidth();
+  int getWidth();
 
-  public int getHeight();
+  int getHeight();
 
-  public void setIcon();
+  void setIcon();
 
-  public void update();
+  void update();
 
-  public boolean shouldClose();
+  boolean shouldClose();
 
-  public void destroy();
+  void destroy();
 
-  public void bindKeyCallback(GLFWKeyCallback keyCallback);
+  void bindKeyCallback(GLFWKeyCallback keyCallback);
 
-  public void bindCursorPosCallback(GLFWCursorPosCallback cursorPosCallback);
+  void bindCursorPosCallback(GLFWCursorPosCallback cursorPosCallback);
 
-  public void bindMouseButtonCallback(GLFWMouseButtonCallback mouseButtonCallback);
+  void bindMouseButtonCallback(GLFWMouseButtonCallback mouseButtonCallback);
 
-  public void bindScrollCallback(GLFWScrollCallback scrollCallback);
+  void bindScrollCallback(GLFWScrollCallback scrollCallback);
 
+  boolean resized(boolean consume);
 }

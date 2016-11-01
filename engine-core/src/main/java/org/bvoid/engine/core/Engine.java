@@ -9,6 +9,8 @@ import javax.inject.Named;
 
 import org.bvoid.engine.core.configuration.Initializer;
 import org.bvoid.engine.input.InputService;
+import org.bvoid.engine.model.Model;
+import org.bvoid.engine.util.Update;
 import org.bvoid.engine.view.View;
 import org.bvoid.engine.window.GlfwWindowCloser;
 
@@ -18,16 +20,18 @@ public class Engine {
 
   @Inject
   private Supplier<List<Initializer>> initializerSupplier;
-
   // TODO discuss closer approach
   @Inject
   private GlfwWindowCloser windowCloser;
-
+  @Inject
+  private List<Model<?>> models;
   // TODO discuss update approach
   @Inject
   private InputService inputService;
   @Inject
   private View view;
+
+
 
   /**
    * Run the engine.
@@ -47,9 +51,11 @@ public class Engine {
   }
 
   private void loop() {
+    final Update update = new Update();
     while (!view.shouldClose()) {
       // (1) Input
       inputService.update();
+      models.forEach(m -> m.update(update.get()));
       // (2) GameLogic
       // (3) World <-> Physics (The physics cycle may happen more than once per frame if the fixed
       // time step is less than the actual frame update time.)

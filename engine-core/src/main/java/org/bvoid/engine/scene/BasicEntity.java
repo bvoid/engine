@@ -8,13 +8,12 @@ public class BasicEntity implements Entity {
 
   private static final long serialVersionUID = 0xA000000000000001L;
 
-  private final List<BasicEntity> entities = new ArrayList<>();
+  private final List<Entity> entities = new ArrayList<>();
 
   private String name;
   private String type;
   private Transform transform;
-
-  public BasicEntity() {}
+  private Shape shape;
 
   @Override
   public String getName() {
@@ -43,8 +42,16 @@ public class BasicEntity implements Entity {
     this.transform = transform;
   }
 
-  public List<BasicEntity> getEntities() {
+  public List<Entity> getEntities() {
     return entities;
+  }
+
+  public Shape getShape() {
+    return shape;
+  }
+
+  public void setShape(Shape shape) {
+    this.shape = shape;
   }
 
   @Override

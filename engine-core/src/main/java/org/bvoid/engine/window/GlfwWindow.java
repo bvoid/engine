@@ -6,17 +6,14 @@ import static org.lwjgl.glfw.GLFW.glfwGetWindowPos;
 import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
 import static org.lwjgl.glfw.GLFW.glfwHideWindow;
 import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
-import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSetCursorPosCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowIcon;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowPos;
 import static org.lwjgl.glfw.GLFW.glfwShowWindow;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
+import static org.lwjgl.glfw.GLFW.glfwSwapInterval;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
-import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.glClear;
 
 import java.nio.IntBuffer;
 
@@ -27,25 +24,39 @@ import org.lwjgl.glfw.GLFWImage.Buffer;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
+import org.lwjgl.glfw.GLFWWindowSizeCallbackI;
 
-public class GlfwWindow implements Window {
+public class GlfwWindow implements Window, GLFWWindowSizeCallbackI {
 
   private final long handle;
+  private int width;
+  private int height;
+  private boolean resized;
 
   public GlfwWindow(long handle) {
     this.handle = handle;
+
   }
 
   @Override
   public void show() {
     glfwMakeContextCurrent(handle);
+    glfwSwapInterval(1);
     glfwShowWindow(handle);
+    org.lwjgl.glfw.GLFW.glfwSetWindowSizeCallback(handle, this);
+    final IntBuffer widthBuffer = createIntBuffer(1);
+    final IntBuffer heightBuffer = createIntBuffer(1);
+
+    glfwGetWindowSize(handle, widthBuffer, heightBuffer);
+    width = widthBuffer.get(0);
+    height = heightBuffer.get(0);
   }
 
   @Override
   public void hide() {
     glfwMakeContextCurrent(handle);
     glfwHideWindow(handle);
+    org.lwjgl.glfw.GLFW.glfwSetWindowSizeCallback(handle, null);
   }
 
   @Override
@@ -85,22 +96,24 @@ public class GlfwWindow implements Window {
 
   @Override
   public int getWidth() {
-    final IntBuffer widthBuffer = createIntBuffer(1);
-    final IntBuffer heightBuffer = createIntBuffer(1);
-
-    glfwGetWindowSize(handle, widthBuffer, heightBuffer);
-
-    return widthBuffer.get(0);
+    // final IntBuffer widthBuffer = createIntBuffer(1);
+    // final IntBuffer heightBuffer = createIntBuffer(1);
+    //
+    // glfwGetWindowSize(handle, widthBuffer, heightBuffer);
+    //
+    // return widthBuffer.get(0);
+    return width;
   }
 
   @Override
   public int getHeight() {
-    final IntBuffer widthBuffer = createIntBuffer(1);
-    final IntBuffer heightBuffer = createIntBuffer(1);
-
-    glfwGetWindowSize(handle, widthBuffer, heightBuffer);
-
-    return heightBuffer.get(0);
+    // final IntBuffer widthBuffer = createIntBuffer(1);
+    // final IntBuffer heightBuffer = createIntBuffer(1);
+    //
+    // glfwGetWindowSize(handle, widthBuffer, heightBuffer);
+    //
+    // return heightBuffer.get(0);
+    return height;
   }
 
   @Override
@@ -111,9 +124,7 @@ public class GlfwWindow implements Window {
 
   @Override
   public void update() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glfwSwapBuffers(handle);
-    glfwPollEvents();
   }
 
   @Override
@@ -147,4 +158,25 @@ public class GlfwWindow implements Window {
     org.lwjgl.glfw.GLFW.glfwSetScrollCallback(handle, scrollCallback);
   }
 
+
+  @Override
+  public void invoke(long window, int width, int height) {
+    if (handle != window) {
+      return;
+    }
+    resized = true;
+    this.width = width;
+    this.height = height;
+  }
+
+  @Override
+  public boolean resized(boolean consume) {
+    if (resized) {
+      if (consume) {
+        resized = false;
+      }
+      return true;
+    }
+    return false;
+  }
 }
