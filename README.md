@@ -1,2 +1,2 @@
 # engine
-[![Build Status](https://travis-ci.org/bvoid/engine.svg?branch=master)](https://travis-ci.org/bvoid/engine) [![Dependency Status](https://www.versioneye.com/user/projects/581912654304530ad3a5527b/badge.svg)](https://www.versioneye.com/user/projects/581912654304530ad3a5527b)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/bvoid/engine/blob/master/LICENSE.md) [![Build Status](https://travis-ci.org/bvoid/engine.svg?branch=master)](https://travis-ci.org/bvoid/engine) [![Dependency Status](https://www.versioneye.com/user/projects/581912654304530ad3a5527b/badge.svg)](https://www.versioneye.com/user/projects/581912654304530ad3a5527b)
